@@ -50,7 +50,7 @@ int cdataHook (){
 }
 
 int main () {
-    iksid *myjabberid;
+    iksid *myjabberid=NULL;
     int state;
 
     /* 
