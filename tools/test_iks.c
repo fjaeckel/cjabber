@@ -90,26 +90,26 @@ int main () {
      * check wether the connection is established or not.
      */
     switch(state){
-                /* everything is OK! ;-) */
             case IKS_OK:
+                /* everything is OK! ;-) */
                 break;
-                /* hostname could not be resolved*/
             case IKS_NET_NODNS:
+                /* hostname could not be resolved*/
                 if (error("hostname lookup failed") == 1)
                     return 1;
-                /* socket descriptor cannot be created */
             case IKS_NET_NOSOCK:
+                /* socket descriptor cannot be created */
                 if (error("socket cannot be created") == 1)
                     return 1;
+            case IKS_NET_NOCONN:
                 /* 
                  * the connection cannot be established..
                  * this could have several sources.
                  */
-            case IKS_NET_NOCONN:
                 if (error("connection failed") == 1)
                     return 1;
-                /* everything else. */
             default:
+                /* everything else. */
                 if (error("io error") == 1)
                     return 1;
     }
