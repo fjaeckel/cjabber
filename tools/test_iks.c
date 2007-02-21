@@ -52,8 +52,6 @@ int cdataHook (){
 int main () {
     iksid *myjabberid;
     int state;
-    char *user;
-    user = JABBERID;
 
     /* 
      * initialising the struct net of the type netdata 
@@ -73,7 +71,7 @@ int main () {
 #endif
     
     /* create a new jabberid */
-    if (!(myjabberid=iks_id_new(iks_parser_stack(net.parser),user)))
+    if (!(myjabberid=iks_id_new(iks_parser_stack(net.parser),JABBERID)))
         error("cannot create uid");
     
     /* again, only for testing purposes */
