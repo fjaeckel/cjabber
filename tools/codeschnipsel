@@ -1,0 +1,27 @@
+int do_debug (char *file, int line, char *format, ...) {
+    char buf[512];
+    int i;
+
+    va_list vl;
+    va_start(vl, format);
+    /* we do not have to send this through the parser */
+    fprintf(stderr, "(%s:%d): ", file, line);
+ 
+    vsnprintf(buf, sizeof(buf) - 1, format, vl);
+    /* expand control-characters to \xff */
+    for (i = 0; i < sizeof(buf); i++) {
+        if (buf[i] == '\0')
+            break;
+        if (buf[i] >= 32 && buf[i] < 126)
+            putc(buf[i], stderr);
+        else if (buf[i] == '\r')
+            fputs("\\r", stderr);
+        else if (buf[i] == '\n')
+            fputs("\\n", stderr);
+        else
+            putc(buf[i], stderr);
+    }
+    fputc('\n', stderr);
+    va_end(vl);
+    return 1;
+} 
