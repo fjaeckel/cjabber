@@ -95,23 +95,35 @@ int main () {
                 break;
             case IKS_NET_NODNS:
                 /* hostname could not be resolved*/
-                if (error("hostname lookup failed") == 1)
+                if (error("hostname lookup failed") == 1){
+                    iks_disconnect(net.parser);
+                    iks_parser_delete(net.parser);
                     return 1;
+                }
             case IKS_NET_NOSOCK:
                 /* socket descriptor cannot be created */
-                if (error("socket cannot be created") == 1)
+                if (error("socket cannot be created") == 1){
+                    iks_disconnect(net.parser);
+                    iks_parser_delete(net.parser);
                     return 1;
+                }
             case IKS_NET_NOCONN:
                 /* 
                  * the connection cannot be established..
                  * this could have several sources.
                  */
-                if (error("connection failed") == 1)
+                if (error("connection failed") == 1){
+                    iks_disconnect(net.parser);
+                    iks_parser_delete(net.parser);
                     return 1;
+                }
             default:
                 /* everything else. */
-                if (error("io error") == 1)
+                if (error("io error") == 1){
+                    iks_disconnect(net.parser);
+                    iks_parser_delete(net.parser);
                     return 1;
+                }
     }
     if (!net.id->resource)
         net.id->resource = RESOURCE;
