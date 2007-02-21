@@ -33,12 +33,18 @@ int error(char *msg){
     return 1;
 }
 
-/* a tag hook, which is present for the parser */
+/*
+ * a tag hook, which is present for the parser 
+ * for now, it does nothing.
+ */
 int tagHook (){
     return IKS_OK;
 }
 
-/* same as the tag hook, but for the cdata. */
+/*
+ * same as the tag hook, but for the cdata. 
+ * for now, it does nothing.
+ */
 int cdataHook (){
     return IKS_OK;
 }
@@ -50,7 +56,7 @@ int main () {
     user = JABBERID;
 
     /* 
-     * initialising the struct net of the typ netdata 
+     * initialising the struct net of the type netdata 
      */
     struct netdata net;
 
@@ -121,6 +127,7 @@ int main () {
     iks_insert_attrib(x, "id", "auth");
     iks_send(net.parser, x);
     iks_delete(x);*/
+
     /* disconnect the parser. */
     iks_disconnect(net.parser);
     /* delete the parser..*/
