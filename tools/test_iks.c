@@ -76,7 +76,7 @@ int main (int argc, char *argv[]) {
     iksid *myjabberid=NULL;
     char *jabberid=NULL;
     int state;
-    int port;
+    int port=0;
     if (argc>2) {
         if(!strncmp(argv[1],"-c",sizeof(argv[1]))){
             jabberid=argv[2];
@@ -103,22 +103,25 @@ int main (int argc, char *argv[]) {
 
     /* create a new SAX parser */
     net.parser = iks_sax_new(NULL, tagHook, cdataHook);
+
     /* check if the parser is valid */
     if (!net.parser) error("fuck off damn bastard.");
+
     /* create a new stream on the parser */
     net.parser = iks_stream_new(IKS_NS_CLIENT, &net, (iksStreamHook *) tagHook);
 
-    /* just for testing purposes */
 #ifdef DEBUG
     if ( net.parser ) puts("net.parser initiated.");
 #endif
     
     /* copy the new jabberid to the net struct */
     net.id = create_id(jabberid,&net);
+
     /* just a boring message.. ;-) */
     printf("Connecting to '%s'...", net.id->server);
+
     /* try to connect to the remote server */
-    if (!port)
+    if (port==0)
         state=iks_connect_tcp(net.parser, net.id->server, IKS_JABBER_PORT);
     else
         state=iks_connect_tcp(net.parser, net.id->server, port);
