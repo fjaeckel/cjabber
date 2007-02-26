@@ -50,6 +50,10 @@ int cdataHook (){
     return IKS_OK;
 }
 
+/* 
+ * this function returns a jabber id and returns
+ * it directly
+ */ 
 iksid* create_id(char *jabberid,struct netdata *net){
     iksid *myjabberid=NULL;
     if (jabberid) {
