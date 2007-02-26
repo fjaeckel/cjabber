@@ -76,12 +76,22 @@ int main (int argc, char *argv[]) {
     iksid *myjabberid=NULL;
     char *jabberid=NULL;
     int state;
+    int port;
     if (argc>2) {
         if(!strncmp(argv[1],"-c",sizeof(argv[1]))){
             jabberid=argv[2];
 #ifdef DEBUG
             puts((char*)jabberid);
 #endif
+        }
+        else {
+            if(!strncmp(argv[1],"-p",sizeof(argv[1]))){
+                port=atoi(argv[2]);
+                if (port == 0)
+                    if(error("can't bind to this port"))
+                        return 1;
+                printf("port: %i\n",port);
+            }
         }
     }
     /* 
