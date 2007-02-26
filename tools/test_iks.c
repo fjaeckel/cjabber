@@ -81,7 +81,7 @@ int main (int argc, char *argv[]) {
 #endif
     
     if (jabberid) {
-        if(!myjabberid=iks_id_new(iks_parser_stack(net.parser,jabberid)))
+        if(!(myjabberid=iks_id_new(iks_parser_stack(net.parser),jabberid)))
             error("cannot create jabberid");
     }
     else {
