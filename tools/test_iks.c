@@ -90,7 +90,9 @@ int main (int argc, char *argv[]) {
                 if (port == 0)
                     if(error("can't bind to this port"))
                         return 1;
+#ifdef DEBUG
                 printf("port: %i\n",port);
+#endif
             }
         }
     }
@@ -116,7 +118,10 @@ int main (int argc, char *argv[]) {
     /* just a boring message.. ;-) */
     printf("Connecting to '%s'...", net.id->server);
     /* try to connect to the remote server */
-    state=iks_connect_tcp(net.parser, net.id->server, IKS_JABBER_PORT);
+    if (!port)
+        state=iks_connect_tcp(net.parser, net.id->server, IKS_JABBER_PORT);
+    else
+        state=iks_connect_tcp(net.parser, net.id->server, port);
     
     /*
      * check wether the connection is established or not.
