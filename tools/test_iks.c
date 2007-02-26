@@ -77,9 +77,6 @@ int main (int argc, char *argv[]) {
     char *jabberid=NULL;
     int state;
     if (argc>2) {
-#ifdef DEBUG
-        puts("you have a argument!");
-#endif
         if(!strncmp(argv[1],"-c",sizeof(argv[1]))){
             jabberid=argv[2];
 #ifdef DEBUG
