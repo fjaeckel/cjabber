@@ -163,11 +163,6 @@ int main (int argc, char *argv[]) {
     printf("username: %s\nserver: %s\nresource: %s\npartial: %s\nfull: %s\n",
             net.id->user, net.id->server, net.id->resource, net.id->partial, net.id->full);
 #endif
-/*    iks *x;
-    x = iks_make_auth(net.id, "foobar", iks_find_attrib(node, "id"));
-    iks_insert_attrib(x, "id", "auth");
-    iks_send(net.parser, x);
-    iks_delete(x);*/
 
     /* disconnect the parser. */
     iks_disconnect(net.parser);
