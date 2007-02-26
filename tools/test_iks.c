@@ -14,6 +14,7 @@
 
 #include <stdio.h>
 #include <iksemel.h>
+#include <string.h>
 
 #define RESOURCE "anyjabberclient"
 #define JABBERID "jabber@localhost"
@@ -49,10 +50,19 @@ int cdataHook (){
     return IKS_OK;
 }
 
-int main () {
+int main (int argc, char *argv[]) {
     iksid *myjabberid=NULL;
+    char *jabberid=NULL;
     int state;
-
+    if (argc>2) {
+        puts("you have a argument!");
+        if(!strncmp(argv[1],"-c",sizeof(argv[1]))){
+            printf("%p %s\n",argv,argv[1]);
+//            strncpy(jabberid,argv[2],sizeof(argv[2]));
+            jabberid=argv[2];
+            puts((char*)jabberid);
+        }
+    }
     /* 
      * initialising the struct net of the type netdata 
      */
@@ -70,10 +80,15 @@ int main () {
     if ( net.parser ) puts("net.parser initiated.");
 #endif
     
-    /* create a new jabberid */
-    if (!(myjabberid=iks_id_new(iks_parser_stack(net.parser),JABBERID)))
-        error("cannot create uid");
-    
+    if (jabberid) {
+        if(!myjabberid=iks_id_new(iks_parser_stack(net.parser,jabberid)))
+            error("cannot create jabberid");
+    }
+    else {
+        /* create a new jabberid */
+        if (!(myjabberid=iks_id_new(iks_parser_stack(net.parser),JABBERID)))
+            error("cannot create jabberid");
+    }
     /* again, only for testing purposes */
 #ifdef DEBUG
     printf("%s@%s\n", myjabberid->user,myjabberid->server);
@@ -82,7 +97,7 @@ int main () {
     /* copy the new jabberid to the net struct */
     net.id = myjabberid;
     /* just a boring message.. ;-) */
-    printf("Connecting to '%s'...\n", net.id->server);
+    printf("Connecting to '%s'...", net.id->server);
     /* try to connect to the remote server */
     state=iks_connect_tcp(net.parser, net.id->server, IKS_JABBER_PORT);
     
@@ -92,6 +107,7 @@ int main () {
     switch(state){
             case IKS_OK:
                 /* everything is OK! ;-) */
+                puts("OK");
                 break;
             case IKS_NET_NODNS:
                 /* hostname could not be resolved*/
