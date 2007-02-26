@@ -117,7 +117,7 @@ int main (int argc, char *argv[]) {
                 puts("OK");
                 break;
             case IKS_NET_NODNS:
-                /* hostname could not be resolved*/
+                /* hostname could not be resolved */
                 if (error("hostname lookup failed") == 1)
                     return 1;
             case IKS_NET_NOSOCK:
