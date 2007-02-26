@@ -50,6 +50,24 @@ int cdataHook (){
     return IKS_OK;
 }
 
+iksid* create_id(char *jabberid,struct netdata *net){
+    iksid *myjabberid=NULL;
+    if (jabberid) {
+        if(!(myjabberid=iks_id_new(iks_parser_stack(net->parser),jabberid)))
+            error("cannot create jabberid");
+    }
+    else {
+        /* create a new jabberid */
+        if (!(myjabberid=iks_id_new(iks_parser_stack(net->parser),JABBERID)))
+            error("cannot create jabberid");
+    }
+    /* again, only for testing purposes */
+#ifdef DEBUG
+    printf("%s@%s\n", myjabberid->user,myjabberid->server);
+#endif
+    return myjabberid;
+}
+
 int main (int argc, char *argv[]) {
     iksid *myjabberid=NULL;
     char *jabberid=NULL;
@@ -57,10 +75,13 @@ int main (int argc, char *argv[]) {
     if (argc>2) {
         puts("you have a argument!");
         if(!strncmp(argv[1],"-c",sizeof(argv[1]))){
+#ifdef DEBUG
             printf("%p %s\n",argv,argv[1]);
-//            strncpy(jabberid,argv[2],sizeof(argv[2]));
+#endif
             jabberid=argv[2];
+#ifdef DEBUG
             puts((char*)jabberid);
+#endif
         }
     }
     /* 
@@ -80,22 +101,8 @@ int main (int argc, char *argv[]) {
     if ( net.parser ) puts("net.parser initiated.");
 #endif
     
-    if (jabberid) {
-        if(!(myjabberid=iks_id_new(iks_parser_stack(net.parser),jabberid)))
-            error("cannot create jabberid");
-    }
-    else {
-        /* create a new jabberid */
-        if (!(myjabberid=iks_id_new(iks_parser_stack(net.parser),JABBERID)))
-            error("cannot create jabberid");
-    }
-    /* again, only for testing purposes */
-#ifdef DEBUG
-    printf("%s@%s\n", myjabberid->user,myjabberid->server);
-#endif
-   
     /* copy the new jabberid to the net struct */
-    net.id = myjabberid;
+    net.id = create_id(jabberid,&net);
     /* just a boring message.. ;-) */
     printf("Connecting to '%s'...", net.id->server);
     /* try to connect to the remote server */
