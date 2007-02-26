@@ -151,6 +151,8 @@ int main (int argc, char *argv[]) {
                 if (error("io error") == 1)
                     return 1;
     }
+
+    /* setting the resource */
     if (!net.id->resource)
         net.id->resource = RESOURCE;
 
