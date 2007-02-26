@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<stream:stream xmlns:stream="http://etherx.jabber.org/streams" xmlns="jabber:client" to="localhost" >
+
+<?xml version='1.0'?><stream:stream xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' id='3057626005' from='localhost' xml:lang='en'>
+
+<iq type="get" id="auth_1" to="localhost" >
+<query xmlns="jabber:iq:auth">
+<username>jabber</username>
+</query>
+</iq>
+
+<iq from="localhost" type="result" id="auth_1" >
+<query xmlns="jabber:iq:auth">
+<username>jabber</username>
+<password/>
+<digest/>
+<resource/>
+</query>
+</iq>
+
+<iq type="set" id="auth_2" to="localhost" >
+<query xmlns="jabber:iq:auth">
+<username>jabber</username>
+<digest>f5ecd57292d9d210a52d22d62f99a84cca4ca2e6</digest>
+<resource>Psi</resource>
+</query>
+</iq>
+
+<iq from="localhost" type="result" id="auth_2" />
+
+<iq type="get" id="aab9a" >
+<query xmlns="jabber:iq:roster"/>
+</iq>
+
+<iq from="jabber@localhost/Psi" type="result" id="aab9a" to="jabber@localhost/Psi" >
+<query xmlns="jabber:iq:roster"/>
+</iq>
+
+<presence>
+<priority>5</priority>
+</presence>
