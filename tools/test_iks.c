@@ -14,7 +14,6 @@
 
 #include <stdio.h>
 #include <iksemel.h>
-#include <string.h>
 
 #define RESOURCE "anyjabberclient"
 #define JABBERID "jabber@localhost"
