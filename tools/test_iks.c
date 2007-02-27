@@ -85,7 +85,6 @@ int main(int argc, char *argv[]) {
   int state,args;
   int port = 0;
   if(argc > 2) {      
-// FIXME: I want a for loop.
     for (args=1; args < argc; args++) {
       if(!strncmp(argv[args], "-c", sizeof(argv[args]))) {
         jabberid = argv[args+1];
