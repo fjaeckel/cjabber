@@ -1,6 +1,8 @@
 /*
  * A basic iksemel testfile..
- * it just creates an xml tree and prints it.
+ * It connects to a server given via cmdline 
+ * or per default to jabber@localhost
+ *
  * never mind.
  * compile it like:
  *      gcc -o test_iks test_iks.c -liksemel
