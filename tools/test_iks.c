@@ -81,24 +81,27 @@ iksid *create_id(char *jabberid, struct netdata * net) {
 int main(int argc, char *argv[]) {
   iksid *myjabberid = NULL;
   char *jabberid = NULL;
-  int state;
+  int state,args;
   int port = 0;
-  if(argc > 2) {
-    if(!strncmp(argv[1], "-c", sizeof(argv[1]))) {
-      jabberid = argv[2];
+  if(argc > 2) {      
+// FIXME: I want a for loop.
+    for (args=1; args < argc; args++) {
+      if(!strncmp(argv[args], "-c", sizeof(argv[args]))) {
+        jabberid = argv[args+1];
 #ifdef DEBUG
-      puts((char *) jabberid);
+        puts((char *) jabberid);
 #endif
-    }
-    else {
-      if(!strncmp(argv[1], "-p", sizeof(argv[1]))) {
-	port = atoi(argv[2]);
-	if(port == 0)
-	  if(error("can't bind to this port"))
-	    return 1;
+      }
+      else {
+        if(!strncmp(argv[args], "-p", sizeof(argv[args]))) {
+         	port = atoi(argv[args+1]);
+         	if(port == 0)
+         	  if(error("can't bind to this port"))
+    	    return 1;
 #ifdef DEBUG
-	printf("port: %i\n", port);
+        	printf("port: %i\n", port);
 #endif
+        }
       }
     }
   }
