@@ -21,32 +21,6 @@
 #include <netdata.h>
 #include <common.h>
 
-/*
- * this function returns a jabber id and returns
- * it directly
- */
-iksid *create_id(char *jabberid, struct netdata * net) {
-  iksid *myjabberid = NULL;
-  if(jabberid) {
-    if(!(myjabberid = iks_id_new(iks_parser_stack(net->parser), jabberid)))
-      error("cannot create jabberid");
-  }
-  else {
-    /*
-     * create a new jabberid 
-     */
-    if(!(myjabberid = iks_id_new(iks_parser_stack(net->parser), JABBERID)))
-      error("cannot create jabberid");
-  }
-  /*
-   * again, only for testing purposes 
-   */
-#ifdef DEBUG
-  printf("%s@%s\n", myjabberid->user, myjabberid->server);
-#endif
-  return myjabberid;
-}
-
 int check_state(int state){
   switch (state) {
     case IKS_OK:
@@ -84,7 +58,6 @@ int check_state(int state){
 }
 
 int main(int argc, char *argv[]) {
- // iksid *myjabberid = NULL;
   char *jabberid = NULL;
   char *resource = NULL;
   int state,args;
@@ -120,7 +93,6 @@ int main(int argc, char *argv[]) {
    * initialising the struct net of the type netdata 
    */
   struct netdata net;
-
   /*
    * create a new SAX parser 
    */

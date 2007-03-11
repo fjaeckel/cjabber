@@ -5,3 +5,4 @@
 
 int tagHook();
 int cdataHook();
+int error(char *msg);
