@@ -82,11 +82,12 @@ iksid *create_id(char *jabberid, struct netdata * net) {
 int main(int argc, char *argv[]) {
   iksid *myjabberid = NULL;
   char *jabberid = NULL;
+  char *resource = NULL;
   int state,args;
   int port = 0;
   if(argc > 2) {      
     for (args=1; args < argc; args++) {
-      if(!strncmp(argv[args], "-c", sizeof(argv[args]))) {
+      if(!strncmp(argv[args], "-u", sizeof(argv[args]))) {
         jabberid = argv[args+1];
 #ifdef DEBUG
         puts((char *) jabberid);
@@ -97,9 +98,15 @@ int main(int argc, char *argv[]) {
          	port = atoi(argv[args+1]);
          	if(port == 0)
          	  if(error("can't bind to this port"))
-    	    return 1;
+        	    return 1;
 #ifdef DEBUG
         	printf("port: %i\n", port);
+#endif
+        }
+        if(!strncmp(argv[args],"-r",sizeof(argv[args]))){
+          resource = argv[args+1];
+#ifdef DEBUG
+          printf("resource: %s\n",resource);
 #endif
         }
       }
