@@ -122,11 +122,11 @@ int main(int argc, char *argv[]) {
 #endif
 
   /*
-   * disconnect the parser. 
+   * disconnects the parser. 
    */
   iks_disconnect(net.parser);
   /*
-   * delete the parser.. 
+   * deletes the parser.. 
    */
   iks_parser_delete(net.parser);
   return 0;
