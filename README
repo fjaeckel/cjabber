@@ -1,0 +1,5 @@
+This is cjabber, a console based Jabber/XMPP Client.
+I don't want ncurses and other bloaty stuff.
+I use iksemel as an Jabber and XML Parser.
+Maybe sometimes it becomes stable.
+For now it relies on GPLv2 code and has to be distributed under GPLv2.
