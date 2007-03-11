@@ -1,7 +1,5 @@
 /*
- * A basic iksemel testfile..
- * It connects to a server given via cmdline 
- * or per default to jabber@localhost
+ * cjabber - a full featured console based jabber/xmpp client written in C
  *
  * author:  Frederic 'jchome' Jaeckel
  * email:   jaeckelf 'at' refuzed 'dot' org
@@ -88,7 +86,7 @@ int main(int argc, char *argv[]) {
   /*
    * copy the new jabberid to the net struct 
    */
-  net.id = create_id(jabberid, &net);
+  net.id = (iksid*) create_id(jabberid, &net);
 
   /*
    * just a boring message.. ;-) 
