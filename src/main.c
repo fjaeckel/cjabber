@@ -5,7 +5,6 @@
  *
  * author:  Frederic 'jchome' Jaeckel
  * email:   jaeckelf 'at' refuzed 'dot' org
- * This file is part of cjabber.
  *
  * cjabber is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2
