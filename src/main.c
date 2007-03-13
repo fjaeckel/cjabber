@@ -116,10 +116,9 @@ int main(int argc, char *argv[]) {
   }
 
 #ifdef DEBUG
-  printf
-    ("username: %s\nserver: %s\nresource: %s\npartial: %s\nfull: %s\n",
-     net.id->user, net.id->server, net.id->resource, net.id->partial,
-     net.id->full);
+  printf("username: %s\nserver: %s\nresource: %s\npartial: %s\nfull: %s\n",
+    net.id->user, net.id->server, net.id->resource, net.id->partial,
+    net.id->full);
 #endif
 
   /*
