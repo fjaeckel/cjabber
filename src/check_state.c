@@ -15,6 +15,8 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #include <iksemel.h>
+#include <stdio.h>
+#include <common.h>
 
 int check_state(int state){
   switch (state) {
@@ -50,4 +52,5 @@ int check_state(int state){
       if(error("io error") == 1)
         return 1;
   }
+  return 0;
 }

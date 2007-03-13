@@ -23,3 +23,4 @@
 int tagHook();
 int cdataHook();
 int error(char *msg);
+int check_state(int state);

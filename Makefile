@@ -18,7 +18,7 @@
 CC=gcc
 SRC=src
 LIBS=-liksemel
-CFLAGS=-Wall
+CFLAGS=-Wall -DDEBUG -Iinclude
 
 all: cjabber
 
@@ -26,19 +26,19 @@ cjabber: hooks.o main.o error.o create_id.o check_state.o
 	${CC} -o cjabber ${SRC}/hooks.o ${SRC}/create_id.o ${SRC}/check_state.o ${SRC}/error.o ${SRC}/main.o ${LIBS} ${CFLAGS}
 
 hooks.o:
-	${CC} -c ${SRC}/hooks.c -o ${SRC}/hooks.o
+	${CC} -c ${SRC}/hooks.c -o ${SRC}/hooks.o ${CFLAGS}
 
 error.o:
-	${CC} -c ${SRC}/error.c -o ${SRC}/error.o
+	${CC} -c ${SRC}/error.c -o ${SRC}/error.o ${CFLAGS}
 
 create_id.o:
-	${CC} -c ${SRC}/create_id.c -o ${SRC}/create_id.o -Iinclude -DDEBUG
+	${CC} -c ${SRC}/create_id.c -o ${SRC}/create_id.o ${CFLAGS}
 
 check_state.o:
-	${CC} -c ${SRC}/check_state.c -o ${SRC}/check_state.o -Iinclude -DDEBUG
+	${CC} -c ${SRC}/check_state.c -o ${SRC}/check_state.o ${CFLAGS}
 
 main.o: hooks.o error.o create_id.o check_state.o
-	${CC} -c ${SRC}/main.c -o ${SRC}/main.o -Iinclude -DDEBUG
+	${CC} -c ${SRC}/main.c -o ${SRC}/main.o ${CFLAGS}
 
 clean:
 	rm cjabber ${SRC}/*.o
