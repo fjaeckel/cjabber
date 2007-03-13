@@ -16,10 +16,10 @@
  */
 
 #include <iksemel.h>
+#include <netdata.h>
 
 #define RESOURCE "anyjabberclient"
 #define JABBERID "jabber@localhost"
-typedef struct netdata netdata;
 
 int tagHook();
 int cdataHook();

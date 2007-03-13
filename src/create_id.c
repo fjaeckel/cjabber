@@ -21,7 +21,6 @@
 
 #include <iksemel.h>
 #include <common.h>
-#include <netdata.h>
 
 /*
  * this function returns a jabber id and returns

@@ -22,3 +22,5 @@ struct netdata {
   iksparser *parser;
   iksid *id;
 };
+
+typedef struct netdata netdata;
