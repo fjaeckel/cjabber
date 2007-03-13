@@ -89,6 +89,12 @@ int main(int argc, char *argv[]) {
   net.id = (iksid*) create_id(jabberid, &net);
 
   /*
+   * setting the resource 
+   */
+  if(!net.id->resource)
+    net.id->resource = RESOURCE;
+
+  /*
    * just a boring message.. ;-) 
    */
   printf("Connecting to '%s'...", net.id->server);
@@ -104,15 +110,10 @@ int main(int argc, char *argv[]) {
   /*
    * check wether the connection is established or not.
    */
-  if (check_state(state) == 1){
+  if (check_state(state)){
       error("something with the connection went wrong");
       return 1;
   }
-  /*
-   * setting the resource 
-   */
-  if(!net.id->resource)
-    net.id->resource = RESOURCE;
 
 #ifdef DEBUG
   printf
