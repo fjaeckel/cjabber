@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
    * check if the parser is valid 
    */
   if(!net.parser)
-    error("fuck off damn bastard.");
+    error("parser could not be initialised.");
 
   /*
    * create a new stream on the parser 
