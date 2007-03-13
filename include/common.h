@@ -19,8 +19,10 @@
 
 #define RESOURCE "anyjabberclient"
 #define JABBERID "jabber@localhost"
+typedef struct netdata netdata;
 
 int tagHook();
 int cdataHook();
 int error(char *msg);
 int check_state(int state);
+iksid *create_id(char *jabberid, netdata *net);
