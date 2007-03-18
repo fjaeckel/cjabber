@@ -32,3 +32,4 @@ int on_error(void *user_data, ikspak *pak);
 int on_roster(netdata *net, ikspak *pak);
 int on_result(netdata *net, ikspak *pak);
 void setup_filter(netdata *net);
+int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_roster);

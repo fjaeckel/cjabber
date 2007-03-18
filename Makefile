@@ -23,14 +23,17 @@ CFLAGS=-Wall -Iinclude
 
 all: cjabber
 
-cjabber: filter.o hooks.o main.o error.o create_id.o check_state.o
-	${CC} -o cjabber ${SRC}/filter.o ${SRC}/hooks.o ${SRC}/create_id.o ${SRC}/check_state.o ${SRC}/error.o ${SRC}/main.o ${LIBS} ${CFLAGS}
+cjabber: filter.o hooks.o cj_connect.o main.o error.o create_id.o check_state.o
+	${CC} -o cjabber ${SRC}/filter.o ${SRC}/hooks.o ${SRC}/cj_connect.o ${SRC}/create_id.o ${SRC}/check_state.o ${SRC}/error.o ${SRC}/main.o ${LIBS} ${CFLAGS}
 
 filter.o:
 	${CC} -c ${SRC}/filter.c -o ${SRC}/filter.o ${CFLAGS}
 
 hooks.o: filter.o
 	${CC} -c ${SRC}/hooks.c -o ${SRC}/hooks.o ${CFLAGS}
+
+cj_connect.o:
+	${CC} -c ${SRC}/cj_connect.c -o ${SRC}/cj_connect.o ${CFLAGS}
 
 error.o:
 	${CC} -c ${SRC}/error.c -o ${SRC}/error.o ${CFLAGS}
@@ -41,7 +44,7 @@ create_id.o:
 check_state.o:
 	${CC} -c ${SRC}/check_state.c -o ${SRC}/check_state.o ${CFLAGS}
 
-main.o: filter.o hooks.o error.o create_id.o check_state.o
+main.o: filter.o hooks.o cj_connect.o error.o create_id.o check_state.o
 	${CC} -c ${SRC}/main.c -o ${SRC}/main.o ${CFLAGS}
 
 clean:

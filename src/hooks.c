@@ -16,11 +16,8 @@
  */
 
 #include <string.h>
-#include <iksemel.h>
+#include <stdio.h>
 #include <common.h>
-#ifdef DEBUG
-  #include <stdio.h>
-#endif
 
 int sasl_established;
 int cj_stream(netdata *net,int type, iks *node){

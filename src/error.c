@@ -21,6 +21,7 @@
  * returns '1' if something is going wrong.
  */
 int error(char *msg) {
+  printf("error: ");
   puts(msg);
   return 1;
 }
