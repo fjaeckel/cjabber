@@ -23,46 +23,6 @@
 #include <string.h>
 #include <common.h>
 
-/* roster */
-iks *cj_roster;
-
-/* a hook on error */
-int on_error (void *user_data, ikspak *pak){
-  /* FIXME: uh, ok.. its a hook.. but maybe it works with error()? */
-	error ("authorization failed");
-	return IKS_FILTER_EAT;
-}
-
-/* a hook for the roster */
-int on_roster (netdata *net, ikspak *pak){
-	cj_roster = pak->x;
-  /* FIXME: do we really need a job done flag? */
-	net->job_done = 1;
-	return IKS_FILTER_EAT;
-}
-
-/* a hook, for the results */
-int on_result (netdata *net, ikspak *pak){
-	iks *x;
-  /* FIXME: set_roster? */
-	if (net->set_roster == 0){
-		x = iks_make_iq (IKS_TYPE_GET, IKS_NS_ROSTER);
-		iks_insert_attrib (x, "id", "roster");
-		iks_send (net->parser, x);
-		iks_delete (x);
-	} else {
-		iks_insert_attrib (cj_roster, "type", "set");
-		iks_send (net->parser, cj_roster);
-	}
-	return IKS_FILTER_EAT;
-}
-
-void on_log (netdata *net, const char *data, size_t size, int is_incoming) {
-	if (iks_is_secure (net->parser)) fprintf (stderr, "Sec\n");
-	if (is_incoming) fprintf (stderr, "<< RECV << \n"); else fprintf (stderr, ">> SEND >> \n");
-	fprintf (stderr, "[%s]\n", data);
-}
-
 int main(int argc, char *argv[]) {
   char *jabberid = NULL;
   char *resource = NULL;
