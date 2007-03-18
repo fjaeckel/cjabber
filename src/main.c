@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
     for (args=1; args < argc; args++) {
       if(!strncmp(argv[args], "-u", sizeof(argv[args]))) {
         jabberid = argv[args+1];
+        args++;
 #ifdef DEBUG
         puts((char *) jabberid);
 #endif
@@ -40,6 +41,7 @@ int main(int argc, char *argv[]) {
       else {
         if(!strncmp(argv[args], "-p", sizeof(argv[args]))) {
          	port = atoi(argv[args+1]);
+          args++;
          	if(port == 0)
          	  if(error("can't bind to this port"))
         	    return 1;
@@ -49,12 +51,14 @@ int main(int argc, char *argv[]) {
         }
         if(!strncmp(argv[args],"-r",sizeof(argv[args]))){
           resource = argv[args+1];
+          args++;
 #ifdef DEBUG
           printf("resource: %s\n",resource);
 #endif
         }
         if(!strncmp(argv[args],"-pw",sizeof(argv[args]))){
             password=argv[args+1];
+            args++;
 #ifdef DEBUG
             printf("password: %s\n",password);
 #endif

@@ -22,6 +22,7 @@
 #define JABBERID "jabber@localhost"
 #define TIMEOUT 10
 
+void usage(char *pname);
 int cj_stream();
 int cdataHook();
 int error(char *msg);
