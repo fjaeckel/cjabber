@@ -25,7 +25,7 @@
 
 /* roster */
 iks *cj_roster;
-//iksfilter *cj_filter;
+
 /* a hook on error */
 int on_error (void *user_data, ikspak *pak){
   /* FIXME: uh, ok.. its a hook.. but maybe it works with error()? */
