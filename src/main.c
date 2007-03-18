@@ -29,7 +29,6 @@ iks *cj_roster;
 //iksfilter *cj_filter;
 /* a hook on error */
 int on_error (void *user_data, ikspak *pak){
-  printf("foo");
   /* FIXME: uh, ok.. its a hook.. but maybe it works with error()? */
 	error ("authorization failed");
 	return IKS_FILTER_EAT;
@@ -37,7 +36,6 @@ int on_error (void *user_data, ikspak *pak){
 
 /* a hook for the roster */
 int on_roster (netdata *net, ikspak *pak){
-  printf("on roster! :-P\n");
 	cj_roster = pak->x;
   /* FIXME: do we really need a job done flag? */
 	net->job_done = 1;
@@ -47,7 +45,6 @@ int on_roster (netdata *net, ikspak *pak){
 /* a hook, for the results */
 int on_result (netdata *net, ikspak *pak){
 	iks *x;
-  printf("on result! :-P\n");
   /* FIXME: set_roster? */
 	if (net->set_roster == 0){
 		x = iks_make_iq (IKS_TYPE_GET, IKS_NS_ROSTER);

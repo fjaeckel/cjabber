@@ -120,9 +120,11 @@ int cj_stream(netdata *net,int type, iks *node){
               ikspak *pak;
               pak = iks_packet(node);
               iks_filter_packet(cj_filter, pak);
+#ifdef DEBUG
               puts("---------------------------------------------");
-              puts(">> did something i don't understand myself <<");
+              puts(">>               progress                  <<");
               puts("---------------------------------------------");
+#endif
               if(net->job_done == 1)
                 return IKS_HOOK;
 
