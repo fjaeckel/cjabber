@@ -13,6 +13,9 @@ TODO:
   - implementing various jabber features
     - muc = multi user chat
     - service discovery
+    - transports
+    - ping via jabber
+    - admin iface for ejabberd/jabberd?
     - ... to be continued ...
   - building a easy to handle TUI (text user interface)
     - everything should be a CLI with scrollback buffer
@@ -20,4 +23,9 @@ TODO:
       - text input
       - logs
       - contact list
-    
+  - implementing connections via port 5223
+  - implementing auth without TLS and SASL (but you don't want to use it :-P)
+  - testing with various jabber servers
+  - structurizing code
+  - cleaning code!!!111oneoneeleven
+  - using more memory allocations
