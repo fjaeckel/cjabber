@@ -81,7 +81,6 @@ int cj_stream(netdata *net,int type, iks *node){
                         puts("--------------------------");
 #endif
                      }
-//                }
                 else {
                     if (net->features & IKS_STREAM_SASL_MD5){
                       iks_start_sasl(net->parser, IKS_SASL_DIGEST_MD5, net->id->user, net->password);
@@ -91,6 +90,7 @@ int cj_stream(netdata *net,int type, iks *node){
                       puts(">>      with MD5        <<");
                       puts("--------------------------");
 #endif
+                      printf("authenticating...");
                     }
                     else if (net->features & IKS_STREAM_SASL_PLAIN) {
                       iks_start_sasl(net->parser, IKS_SASL_PLAIN, net->id->user, net->password);
@@ -100,12 +100,14 @@ int cj_stream(netdata *net,int type, iks *node){
                       puts(">>      with PLAIN      <<");
                       puts("--------------------------");
 #endif
+                      printf("authenticated...");
                     }
                   }
                 }
             }
             else if(strcmp("failure", iks_name(node))==0) {
               error("sasl auth failed");
+              return 3;
             }
             else if(strcmp("success", iks_name(node))==0) {
               net->authorized = 1;
@@ -115,6 +117,7 @@ int cj_stream(netdata *net,int type, iks *node){
               puts(">>       success        <<");
               puts("--------------------------");
 #endif
+              puts("OK");
             }
             else {
               ikspak *pak;
