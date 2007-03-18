@@ -178,11 +178,3 @@ int cj_stream(netdata *net,int type, iks *node){
     }
     return IKS_OK;
 }
-
-/*
- * same as the tag hook, but for the cdata. 
- * for now, it does nothing.
- */
-int cdataHook() {
-  return IKS_OK;
-}

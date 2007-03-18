@@ -24,7 +24,6 @@
 
 void usage(char *pname);
 int cj_stream();
-int cdataHook();
 int error(char *msg);
 int check_state(int state);
 iksid *create_id(char *jabberid, netdata *net);
