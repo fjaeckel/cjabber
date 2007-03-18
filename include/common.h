@@ -34,3 +34,4 @@ int on_roster(netdata *net, ikspak *pak);
 int on_result(netdata *net, ikspak *pak);
 void setup_filter(netdata *net);
 int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_roster);
+void on_log (netdata *net, const char *data, size_t size, int is_incoming);
