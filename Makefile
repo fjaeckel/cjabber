@@ -19,13 +19,17 @@ CC=gcc
 SRC=src
 LIBS=-liksemel
 CFLAGS=-Wall -DDEBUG -Iinclude
+#CFLAGS=-Wall -Iinclude
 
 all: cjabber
 
-cjabber: hooks.o main.o error.o create_id.o check_state.o
-	${CC} -o cjabber ${SRC}/hooks.o ${SRC}/create_id.o ${SRC}/check_state.o ${SRC}/error.o ${SRC}/main.o ${LIBS} ${CFLAGS}
+cjabber: filter.o hooks.o main.o error.o create_id.o check_state.o
+	${CC} -o cjabber ${SRC}/filter.o ${SRC}/hooks.o ${SRC}/create_id.o ${SRC}/check_state.o ${SRC}/error.o ${SRC}/main.o ${LIBS} ${CFLAGS}
 
-hooks.o:
+filter.o:
+	${CC} -c ${SRC}/filter.c -o ${SRC}/filter.o ${CFLAGS}
+
+hooks.o: filter.o
 	${CC} -c ${SRC}/hooks.c -o ${SRC}/hooks.o ${CFLAGS}
 
 error.o:
@@ -37,7 +41,7 @@ create_id.o:
 check_state.o:
 	${CC} -c ${SRC}/check_state.c -o ${SRC}/check_state.o ${CFLAGS}
 
-main.o: hooks.o error.o create_id.o check_state.o
+main.o: filter.o hooks.o error.o create_id.o check_state.o
 	${CC} -c ${SRC}/main.c -o ${SRC}/main.o ${CFLAGS}
 
 clean:

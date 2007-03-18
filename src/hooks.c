@@ -18,6 +18,9 @@
 #include <string.h>
 #include <iksemel.h>
 #include <common.h>
+#ifdef DEBUG
+  #include <stdio.h>
+#endif
 
 int sasl_established;
 int cj_stream(netdata *net,int type, iks *node){
@@ -25,6 +28,11 @@ int cj_stream(netdata *net,int type, iks *node){
         case IKS_NODE_START:
             if(!iks_is_secure(net->parser)){
               iks_start_tls(net->parser);
+#ifdef DEBUG
+              puts("----------------------------");
+              puts(">> started tls connection <<");
+              puts("----------------------------");
+#endif
               break;
             }
             else {
@@ -34,6 +42,11 @@ int cj_stream(netdata *net,int type, iks *node){
                 iks_insert_attrib(auth, "id", "auth");
                 iks_send(net->parser, auth);
                 iks_delete(auth);
+#ifdef DEBUG
+                puts("--------------------------");
+                puts(">>  sent a auth packet  <<");
+                puts("--------------------------");
+#endif
               }
             }
             break;
@@ -42,40 +55,77 @@ int cj_stream(netdata *net,int type, iks *node){
                 net->features = iks_stream_features(node);
                 if (!iks_is_secure(net->parser))
                     break;
+#ifdef DEBUG
+                printf("authorized: %d\n",net->authorized);
+#endif
                 if (net->authorized){
                     iks *t;
                     if (net->features & IKS_STREAM_BIND) {
                         t = iks_make_resource_bind(net->id);
                         iks_send(net->parser, t);
                         iks_delete(t);
+#ifdef DEBUG
+                        puts("--------------------------");
+                        puts(">>    bind successful   <<");
+                        puts("--------------------------");
+#endif
                     }
                     if (net->features & IKS_STREAM_SESSION) {
                         t = iks_make_session();
                         iks_insert_attrib(t,"id","auth");
                         iks_send(net->parser, t);
                         iks_delete(t);
+#ifdef DEBUG
+                        puts("--------------------------");
+                        puts(">>  session successful  <<");
+                        puts("--------------------------");
+#endif
                     }
-                }
-                if (net->features){
-                  iks_start_sasl(net->parser, IKS_SASL_DIGEST_MD5, net->id->user, net->password);
-                }
-                else if (net->features & IKS_STREAM_SASL_PLAIN) {
-                  iks_start_sasl(net->parser, IKS_SASL_PLAIN, net->id->user, net->password);
+                
+                else {
+                    if (net->features & IKS_STREAM_SASL_MD5){
+                      iks_start_sasl(net->parser, IKS_SASL_DIGEST_MD5, net->id->user, net->password);
+#ifdef DEBUG
+                      puts("--------------------------");
+                      puts(">>    authenticated     <<");
+                      puts(">>      with MD5        <<");
+                      puts("--------------------------");
+#endif
+                    }
+                    else if (net->features & IKS_STREAM_SASL_PLAIN) {
+                      iks_start_sasl(net->parser, IKS_SASL_PLAIN, net->id->user, net->password);
+#ifdef DEBUG
+                      puts("--------------------------");
+                      puts(">>    authenticated     <<");
+                      puts(">>      with PLAIN      <<");
+                      puts("--------------------------");
+#endif
+                    }
+                  }
                 }
             }
             else if(strcmp("failure", iks_name(node))==0) {
-                error("sasl auth failed");
+              error("sasl auth failed");
             }
             else if(strcmp("success", iks_name(node))==0) {
-                net->authorized = 1;
-                iks_send_header(net->parser, net->id->server);
+              net->authorized = 1;
+              iks_send_header(net->parser, net->id->server);
+#ifdef DEBUG
+              puts("--------------------------");
+              puts(">>       success        <<");
+              puts("--------------------------");
+#endif
             }
             else {
-                ikspak *pak;
-                pak = iks_packet(node);
-                iks_filter_packet(cj_filter, pak);
-                if(net->job_done == 1)
-                    return IKS_HOOK;
+              ikspak *pak;
+              pak = iks_packet(node);
+              iks_filter_packet(cj_filter, pak);
+              puts("--------------------------");
+              puts("did something i don't understand myself");
+              puts("--------------------------");
+              if(net->job_done == 1)
+                return IKS_HOOK;
+
             }
             break;
         case IKS_NODE_STOP:

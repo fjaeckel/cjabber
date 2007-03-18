@@ -26,7 +26,7 @@
 
 /* roster */
 iks *cj_roster;
-
+//iksfilter *cj_filter;
 /* a hook on error */
 int on_error (void *user_data, ikspak *pak){
   printf("foo");
@@ -77,8 +77,8 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port) {
   netdata net;
   /* create a new stream on the parser */
   net.parser = iks_stream_new(IKS_NS_CLIENT, &net, (iksStreamHook *) cj_stream);
-  iks_set_log_hook (net.parser, (iksLogHook *) on_log);
 #ifdef DEBUG
+  iks_set_log_hook (net.parser, (iksLogHook *) on_log);
   if(net.parser)
     puts("net.parser initiated.");
 #endif

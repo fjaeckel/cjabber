@@ -1,7 +1,6 @@
 #include <iksemel.h>
 #include <common.h>
 
-//iksfilter *cj_filter;
 /*
  * a simple filter for the connection.
  */

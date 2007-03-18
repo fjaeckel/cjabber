@@ -20,9 +20,15 @@
 
 #define RESOURCE "anyjabberclient"
 #define JABBERID "jabber@localhost"
+#define TIMEOUT 10
 
-int tagHook();
+int cj_stream();
 int cdataHook();
 int error(char *msg);
 int check_state(int state);
 iksid *create_id(char *jabberid, netdata *net);
+iksfilter *cj_filter;
+int on_error(void *user_data, ikspak *pak);
+int on_roster(netdata *net, ikspak *pak);
+int on_result(netdata *net, ikspak *pak);
+void setup_filter(netdata *net);

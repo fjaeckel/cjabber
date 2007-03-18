@@ -21,6 +21,12 @@
 struct netdata {
   iksparser *parser;
   iksid *id;
+  char *password;
+  int counter;
+  int set_roster;
+  int job_done;
+  int features;
+  int authorized;
 };
 
 typedef struct netdata netdata;

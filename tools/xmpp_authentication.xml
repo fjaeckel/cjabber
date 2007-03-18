@@ -1,15 +1,20 @@
+GET!
 <?xml version="1.0"?>
-
+-------------------------------------------------------------
+SET!
 <stream:stream xmlns:stream="http://etherx.jabber.org/streams" xmlns="jabber:client" to="localhost" >
-
+-------------------------------------------------------------
+GET!
 <?xml version='1.0'?><stream:stream xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' id='3057626005' from='localhost' xml:lang='en'>
-
+-------------------------------------------------------------
+SET!
 <iq type="get" id="auth_1" to="localhost" >
 <query xmlns="jabber:iq:auth">
 <username>jabber</username>
 </query>
 </iq>
-
+-------------------------------------------------------------
+GET!
 <iq from="localhost" type="result" id="auth_1" >
 <query xmlns="jabber:iq:auth">
 <username>jabber</username>
@@ -18,7 +23,8 @@
 <resource/>
 </query>
 </iq>
-
+-------------------------------------------------------------
+SET!
 <iq type="set" id="auth_2" to="localhost" >
 <query xmlns="jabber:iq:auth">
 <username>jabber</username>
@@ -26,17 +32,20 @@
 <resource>Psi</resource>
 </query>
 </iq>
-
+-------------------------------------------------------------
+GET!
 <iq from="localhost" type="result" id="auth_2" />
-
+SET!
 <iq type="get" id="aab9a" >
 <query xmlns="jabber:iq:roster"/>
 </iq>
-
+-------------------------------------------------------------
+GET!
 <iq from="jabber@localhost/Psi" type="result" id="aab9a" to="jabber@localhost/Psi" >
 <query xmlns="jabber:iq:roster"/>
 </iq>
-
+-------------------------------------------------------------
+SET!
 <presence>
 <priority>5</priority>
 </presence>
