@@ -41,7 +41,6 @@ int on_roster (netdata *net, ikspak *pak){
 /* a hook, for the results */
 int on_result (netdata *net, ikspak *pak){
 	iks *x;
-  /* FIXME: set_roster? */
 	if (net->set_roster == 0){
 		x = iks_make_iq (IKS_TYPE_GET, IKS_NS_ROSTER);
 		iks_insert_attrib (x, "id", "roster");
