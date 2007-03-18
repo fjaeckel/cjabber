@@ -80,8 +80,8 @@ int cj_stream(netdata *net,int type, iks *node){
                         puts(">>  session successful  <<");
                         puts("--------------------------");
 #endif
-                    }
-                
+                     }
+//                }
                 else {
                     if (net->features & IKS_STREAM_SASL_MD5){
                       iks_start_sasl(net->parser, IKS_SASL_DIGEST_MD5, net->id->user, net->password);
@@ -120,9 +120,9 @@ int cj_stream(netdata *net,int type, iks *node){
               ikspak *pak;
               pak = iks_packet(node);
               iks_filter_packet(cj_filter, pak);
-              puts("--------------------------");
-              puts("did something i don't understand myself");
-              puts("--------------------------");
+              puts("---------------------------------------------");
+              puts(">> did something i don't understand myself <<");
+              puts("---------------------------------------------");
               if(net->job_done == 1)
                 return IKS_HOOK;
 

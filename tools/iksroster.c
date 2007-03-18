@@ -95,7 +95,7 @@ int
 on_result (struct session *sess, ikspak *pak)
 {
 	iks *x;
-
+  puts("barthefoo");
 	if (sess->set_roster == 0) {
 		x = iks_make_iq (IKS_TYPE_GET, IKS_NS_ROSTER);
 		iks_insert_attrib (x, "id", "roster");
@@ -189,6 +189,7 @@ on_error (void *user_data, ikspak *pak)
 int
 on_roster (struct session *sess, ikspak *pak)
 {
+    puts("foothebar");
 	my_roster = pak->x;
 	sess->job_done = 1;
 	return IKS_FILTER_EAT;

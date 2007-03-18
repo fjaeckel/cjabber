@@ -37,7 +37,7 @@ int on_error (void *user_data, ikspak *pak){
 
 /* a hook for the roster */
 int on_roster (netdata *net, ikspak *pak){
-  printf("foo");
+  printf("on roster! :-P\n");
 	cj_roster = pak->x;
   /* FIXME: do we really need a job done flag? */
 	net->job_done = 1;
@@ -47,7 +47,7 @@ int on_roster (netdata *net, ikspak *pak){
 /* a hook, for the results */
 int on_result (netdata *net, ikspak *pak){
 	iks *x;
-  printf("foo");
+  printf("on result! :-P\n");
   /* FIXME: set_roster? */
 	if (net->set_roster == 0){
 		x = iks_make_iq (IKS_TYPE_GET, IKS_NS_ROSTER);
@@ -72,7 +72,7 @@ void on_log (netdata *net, const char *data, size_t size, int is_incoming) {
  * holding the connection, sending things and 
  * authentification.
  */
-int cj_connect(char *jabberid, char *pass, char *resource, int port) {
+int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_roster) {
   int state;
   netdata net;
   /* create a new stream on the parser */
@@ -87,6 +87,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port) {
       net.password = pass;
   else
       error("no password set.");
+  net.set_roster = set_roster;
 
   /* copy the new jabberid to the net struct */
   net.id = (iksid*) create_id(jabberid, &net);
@@ -137,7 +138,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port) {
     }
 	}
   /* disconnects the parser. */
-  iks_disconnect(net.parser);
+//  iks_disconnect(net.parser);
   /* deletes the parser.. */
   iks_parser_delete(net.parser);
   return 0;
@@ -183,6 +184,6 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  cj_connect(jabberid,password,resource,port);
+  cj_connect(jabberid,password,resource,port,0);
   return 0;
 }
