@@ -17,19 +17,28 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     puts("net.parser initiated.");
 #endif
   
-  if(pass)
+  /* 
+   * yes, for now I forbid passwords <=1 character. 
+   */
+  if(pass && strlen(pass)>1)
       net.password = pass;
   else {
+      /* 
+       * passwords >127 chars aren't practiable.
+       * maybe I'll change it to a dynamic pointer
+       * but for now I'm too lazy. :-P
+       */
       char password[128];
       printf("Enter your password: ");
       fgets(password,127,stdin);
       strtok(password,"\r\n");
-      if (password) {
+      printf("%d\n",strlen(password));
+      if (strlen(password)>1) {
         net.password = password;
         printf("password: %s\n",net.password);
       }
       else {
-          error("no password specified");
+          error("no or too short password specified");
           return 1;
       }
   }
@@ -87,37 +96,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
         return 1;
     }
 	}
-  iks *x;
-  printf("[1] free for chat\n"
-         "[2] away\n"
-         "[3] extended away\n"
-         "[4] dnd\n"
-         "[0] unavailable\n"
-         "----------------\n"
-         "select your presence state: ");
-  char buf[2];
-  fgets(buf,2,stdin);
-  strtok(buf,"\r\n");
-  switch(atoi(buf)) {
-      case 1:
-          x = iks_make_pres(IKS_SHOW_CHAT,"");
-          break;
-      case 2:
-          x = iks_make_pres(IKS_SHOW_AWAY,"");
-          break;
-      case 3:
-          x = iks_make_pres(IKS_SHOW_AWAY,"i'm just fucking away, d00d!");
-          break;
-      case 4:
-          x = iks_make_pres(IKS_SHOW_DND,"");
-          break;
-      case 5:
-          x = iks_make_pres(IKS_SHOW_UNAVAILABLE,"");
-          break;
-      default:
-          break;
-  }
-  iks_send(net.parser,x);
+  presence(&net);
   /*/while(net.parser){
     iks_recv(net.parser,30);
   }*/

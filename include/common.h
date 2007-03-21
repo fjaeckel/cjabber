@@ -28,6 +28,7 @@ int error(char *msg);
 int check_state(int state);
 iksid *create_id(char *jabberid, netdata *net);
 iksfilter *cj_filter;
+void presence(netdata *net);
 int on_error(void *user_data, ikspak *pak);
 int on_roster(netdata *net, ikspak *pak);
 int on_result(netdata *net, ikspak *pak);

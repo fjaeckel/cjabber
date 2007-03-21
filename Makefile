@@ -23,8 +23,8 @@ CFLAGS=-Wall -DDEBUG -Iinclude
 
 all: cjabber
 
-cjabber: filter.o hooks.o cj_connect.o main.o error.o create_id.o check_state.o usage.o
-	${CC} -o cjabber ${SRC}/filter.o ${SRC}/hooks.o ${SRC}/cj_connect.o ${SRC}/create_id.o ${SRC}/check_state.o ${SRC}/error.o ${SRC}/usage.o ${SRC}/main.o ${LIBS} ${CFLAGS}
+cjabber: filter.o hooks.o presence.o cj_connect.o main.o error.o create_id.o check_state.o usage.o
+	${CC} -o cjabber ${SRC}/*.o ${LIBS} ${CFLAGS}
 
 filter.o:
 	${CC} -c ${SRC}/filter.c -o ${SRC}/filter.o ${CFLAGS}
@@ -32,7 +32,10 @@ filter.o:
 hooks.o: filter.o
 	${CC} -c ${SRC}/hooks.c -o ${SRC}/hooks.o ${CFLAGS}
 
-cj_connect.o:
+presence.o:
+	${CC} -c ${SRC}/presence.c -o ${SRC}/presence.o ${CFLAGS}
+
+cj_connect.o: presence.o
 	${CC} -c ${SRC}/cj_connect.c -o ${SRC}/cj_connect.o ${CFLAGS}
 
 error.o:
@@ -47,7 +50,7 @@ check_state.o:
 usage.o:
 	${CC} -c ${SRC}/usage.c -o ${SRC}/usage.o ${CFLAGS}
 
-main.o: filter.o hooks.o cj_connect.o error.o create_id.o check_state.o usage.o
+main.o: filter.o hooks.o presence.o cj_connect.o error.o create_id.o check_state.o usage.o
 	${CC} -c ${SRC}/main.c -o ${SRC}/main.o ${CFLAGS}
 
 clean:
