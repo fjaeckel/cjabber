@@ -4,6 +4,39 @@ I use iksemel as an Jabber and XML Parser.
 Maybe sometimes it becomes stable.
 For now it relies on GPLv2 code and has to be distributed under GPLv2.
 
+standards I want to implement:
+  RFC 3920 - Jabber/XMPP Core
+  RFC 3921 - Blocking Communication (Privacy Rules)
+  XEP-0001 - XMPP Extensions Protocols
+  XEP-0004 - Data Forms
+  XEP-0012 - Last Activity
+  XEP-0013 - Flexible Offline Message Retrieval
+  XEP-0016 - Privacy Lists
+  XEP-0027 - Current Jabber OpenPGP Usage
+  XEP-0030 - Service Discovery
+  XEP-0045 - Multi-User Chat
+  XEP-0047 - In Band Bytestreams (IBB)
+  XEP-0050 - Ad-Hoc Commands
+  XEP-0055 - Jabber Search
+  XEP-0060 - Publish-Subscribe
+  XEP-0073 - Basic IM Protocol Suite
+  XEP-0077 - In-Band Registration
+  XEP-0079 - Advanced Message Processing
+  XEP-0083 - Nested Roster Groups
+  XEP-0085 - Chat State Notifications
+  XEP-0091 - Delayed Delivery
+  XEP-0092 - Software Version
+  XEP-0095 - Stream Initiation
+  XEP-0100 - Gateway Interaction
+  XEP-0114 - Jabber Component Protocol
+  XEP-0126 - Invisibility
+  XEP-0133 - Service Administration
+  XEP-0154 - User Profile
+  XEP-0175 - Best Practices for Use of SASL ANONYMOUS
+  XEP-0178 - Best Practices for Use of SASL EXTERNAL with Certificates
+  XEP-0182 - Application Specific Error Conditions
+  XEP-0190 - Best Practice for Closing Idle Streams
+
 TODO:
   - getting the contact list
   - setting presence states
