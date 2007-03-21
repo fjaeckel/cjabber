@@ -33,7 +33,6 @@ int on_error (void *user_data, ikspak *pak){
 /* a hook for the roster */
 int on_roster (netdata *net, ikspak *pak){
 	cj_roster = pak->x;
-  /* FIXME: do we really need a job done flag? */
 	net->job_done = 1;
 	return IKS_FILTER_EAT;
 }
