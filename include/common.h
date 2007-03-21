@@ -23,15 +23,19 @@
 #define TIMEOUT 10
 
 void usage(char *pname);
-int cj_stream();
 int error(char *msg);
-int check_state(int state);
-iksid *create_id(char *jabberid, netdata *net);
+
+int cj_stream();
 iksfilter *cj_filter;
+void setup_filter(netdata *net);
+int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_roster);
+
+int check_state(int state);
+
+iksid *create_id(char *jabberid, netdata *net);
 void presence(netdata *net);
+
 int on_error(void *user_data, ikspak *pak);
 int on_roster(netdata *net, ikspak *pak);
 int on_result(netdata *net, ikspak *pak);
-void setup_filter(netdata *net);
-int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_roster);
 void on_log (netdata *net, const char *data, size_t size, int is_incoming);
