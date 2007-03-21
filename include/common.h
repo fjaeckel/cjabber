@@ -18,7 +18,7 @@
 #include <iksemel.h>
 #include <netdata.h>
 
-#define RESOURCE "anyjabberclient"
+#define RESOURCE "cjabber"
 #define JABBERID "jabber@localhost"
 #define TIMEOUT 10
 
