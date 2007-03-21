@@ -21,26 +21,26 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
    * yes, for now I forbid passwords <=1 character. 
    */
   if(pass && strlen(pass)>1)
-      net.password = pass;
+    net.password = pass;
   else {
-      /* 
-       * passwords >127 chars aren't practiable.
-       * maybe I'll change it to a dynamic pointer
-       * but for now I'm too lazy. :-P
-       */
-      char password[128];
-      printf("Enter your password: ");
-      fgets(password,127,stdin);
-      strtok(password,"\r\n");
-      printf("%d\n",strlen(password));
-      if (strlen(password)>1) {
-        net.password = password;
-        printf("password: %s\n",net.password);
-      }
-      else {
-          error("no or too short password specified");
-          return 1;
-      }
+    /* 
+     * passwords >127 chars aren't practiable.
+     * maybe I'll change it to a dynamic pointer
+     * but for now I'm too lazy. :-P
+     */
+    char password[128];
+    printf("Enter your password: ");
+    fgets(password,127,stdin);
+    strtok(password,"\r\n");
+    printf("%d\n",strlen(password));
+    if (strlen(password)>1) {
+      net.password = password;
+      printf("password: %s\n",net.password);
+    }
+    else {
+      error("no or too short password specified");
+      return 1;
+    }
   }
   net.set_roster = set_roster;
 
@@ -51,7 +51,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
   if(!net.id->resource && !resource)
     net.id->resource = RESOURCE;
   else
-      net.id->resource = resource;
+    net.id->resource = resource;
 
   /* just a boring message.. ;-) */
   printf("Connecting to '%s'...", net.id->server);
@@ -66,8 +66,8 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
 
   /* check wether the connection is established or not. */
   if (check_state(state)){
-      error("something with the connection went wrong");
-      return 1;
+    error("something with the connection went wrong");
+    return 1;
   }
 
 #ifdef DEBUG
@@ -81,19 +81,19 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
   while (1) {
 		state = iks_recv (net.parser, 1);
 		if (IKS_HOOK == state)
-        break;
+      break;
 		if (IKS_NET_TLSFAIL == state) {
-        error ("tls handshake failed");
-        return 1;
+      error ("tls handshake failed");
+      return 1;
     }
 		if (IKS_OK != state) {
-        error ("io error");
-        return 1;
+      error ("io error");
+      return 1;
     }
     net.counter--;
     if (net.counter == 0) {
-        error ("network timeout");
-        return 1;
+      error ("network timeout");
+      return 1;
     }
 	}
   presence(&net);
