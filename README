@@ -1,10 +1,12 @@
 This is cjabber, a console based Jabber/XMPP Client.
 I don't want ncurses and other bloaty stuff.
-I use iksemel as an Jabber and XML Parser.
+I use iksemel as an Jabber library and as XML Parser.
 Maybe sometimes it becomes stable.
-For now it relies on GPLv2 code and has to be distributed under GPLv2.
+For now it relies on LGPLv2 code and has to be distributed under GPLv2.
 
 standards I want to implement:
+  Name       Description
+  -----------------------------------------------------------------------------
   RFC 3920 - Jabber/XMPP Core
   RFC 3921 - Blocking Communication (Privacy Rules)
   XEP-0001 - XMPP Extensions Protocols
@@ -12,6 +14,9 @@ standards I want to implement:
   XEP-0012 - Last Activity
   XEP-0013 - Flexible Offline Message Retrieval
   XEP-0016 - Privacy Lists
+  XEP-0022 - Message Events
+  XEP-0023 - Message Expiration
+  XEP-0025 - Jabber HTTP Polling
   XEP-0027 - Current Jabber OpenPGP Usage
   XEP-0030 - Service Discovery
   XEP-0045 - Multi-User Chat
@@ -21,6 +26,7 @@ standards I want to implement:
   XEP-0060 - Publish-Subscribe
   XEP-0073 - Basic IM Protocol Suite
   XEP-0077 - In-Band Registration
+  XEP-0078 - Non-SASL Authentication
   XEP-0079 - Advanced Message Processing
   XEP-0083 - Nested Roster Groups
   XEP-0085 - Chat State Notifications
