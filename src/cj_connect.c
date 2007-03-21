@@ -20,8 +20,18 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
   if(pass)
       net.password = pass;
   else {
-      error("no password set.");
-      return 1;
+      char password[128];
+      printf("Enter your password: ");
+      fgets(password,127,stdin);
+      strtok(password,"\r\n");
+      if (password) {
+        net.password = password;
+        printf("password: %s\n",net.password);
+      }
+      else {
+          error("no password specified");
+          return 1;
+      }
   }
   net.set_roster = set_roster;
 
@@ -85,23 +95,23 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
          "[0] unavailable\n"
          "----------------\n"
          "select your presence state: ");
-  int foo;
-  foo = getchar();
-  printf("%d\n",foo);
-  switch(foo) {
-      case 49:
+  char buf[2];
+  fgets(buf,2,stdin);
+  strtok(buf,"\r\n");
+  switch(atoi(buf)) {
+      case 1:
           x = iks_make_pres(IKS_SHOW_CHAT,"");
           break;
-      case 50:
+      case 2:
           x = iks_make_pres(IKS_SHOW_AWAY,"");
           break;
-      case 51:
+      case 3:
           x = iks_make_pres(IKS_SHOW_AWAY,"i'm just fucking away, d00d!");
           break;
-      case 52:
+      case 4:
           x = iks_make_pres(IKS_SHOW_DND,"");
           break;
-      case 48:
+      case 5:
           x = iks_make_pres(IKS_SHOW_UNAVAILABLE,"");
           break;
       default:
@@ -111,7 +121,9 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
   /*/while(net.parser){
     iks_recv(net.parser,30);
   }*/
-
+  /* just to see the presence in another roster */
+  sleep(15);
+  
   /* disconnects the parser. */
   printf("disconnecting...");
   iks_disconnect(net.parser);
