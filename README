@@ -28,8 +28,10 @@ standards I want to implement:
   XEP-0077 - In-Band Registration
   XEP-0078 - Non-SASL Authentication
   XEP-0079 - Advanced Message Processing
+  XEP-0082 - Jabber Date and Time Profiles
   XEP-0083 - Nested Roster Groups
   XEP-0085 - Chat State Notifications
+  XEP-0090 - Entity Time
   XEP-0091 - Delayed Delivery
   XEP-0092 - Software Version
   XEP-0095 - Stream Initiation
@@ -64,6 +66,7 @@ TODO:
       - contact list
   - implementing connections via port 5223
   - implementing auth without TLS and SASL (but you don't want to use it :-P)
+  - HTTP/SOCKS Proxy support
   - testing with various jabber servers
   - structurizing code
   - cleaning code!!!111oneoneeleven
