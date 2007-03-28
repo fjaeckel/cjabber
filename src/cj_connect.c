@@ -17,6 +17,8 @@
 
 #include <common.h>
 #include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
 /*
  * the connection routine for connecting to the server,
