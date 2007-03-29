@@ -44,10 +44,9 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
   else {
     /*
      * FIXME: I WANT TO BE FIXED!!!111oneoneeleven
-     *
-     * passwords >127 chars aren't practiable.
-     * maybe I'll change it to a dynamic pointer
-     * but for now I'm too lazy. :-P
+     * Y? cause theres a buffer overflow possible
+     * which ends in a SIGSEGV. Maybe it's useable
+     * to provide executeable code.
      */
     char password[128]= {""};
     printf("Enter your password: ");
