@@ -26,7 +26,7 @@
  * authentification.
  */
 int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_roster) {
-  int state;
+  int state=0;
   netdata net;
   /* create a new stream on the parser */
   net.parser = iks_stream_new(IKS_NS_CLIENT, &net, (iksStreamHook *) cj_stream);
@@ -42,7 +42,9 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
   if(pass && strlen(pass)>1)
     net.password = pass;
   else {
-    /* 
+    /*
+     * FIXME: I WANT TO BE FIXED!!!111oneoneeleven
+     *
      * passwords >127 chars aren't practiable.
      * maybe I'll change it to a dynamic pointer
      * but for now I'm too lazy. :-P
