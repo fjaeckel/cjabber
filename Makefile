@@ -23,8 +23,10 @@ CFLAGS=-Wall -Iinclude
 
 all: cjabber
 
-cjabber: filter.o hooks.o presence.o cj_connect.o main.o error.o create_id.o check_state.o usage.o
+cjabber: filter.o hooks.o presence.o cj_connect.o main.o error.o create_id.o check_state.o usage.o ui.o
 	${CC} -o cjabber ${SRC}/*.o ${LIBS} ${CFLAGS}
+ui.o:
+	${CC} -c ${SRC}/ui.c -o ${SRC}/ui.o ${CFLAGS}
 
 filter.o:
 	${CC} -c ${SRC}/filter.c -o ${SRC}/filter.o ${CFLAGS}
@@ -50,7 +52,7 @@ check_state.o:
 usage.o:
 	${CC} -c ${SRC}/usage.c -o ${SRC}/usage.o ${CFLAGS}
 
-main.o: filter.o hooks.o presence.o cj_connect.o error.o create_id.o check_state.o usage.o
+main.o: filter.o hooks.o presence.o cj_connect.o error.o create_id.o check_state.o usage.o ui.o
 	${CC} -c ${SRC}/main.c -o ${SRC}/main.o ${CFLAGS}
 
 clean:

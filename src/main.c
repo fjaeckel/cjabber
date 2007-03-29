@@ -72,6 +72,7 @@ int main(int argc, char *argv[]) {
   /*
    * connect, d00d! :-D
    */
-  cj_connect(jabberid,password,resource,port,0);
+  //cj_connect(jabberid,password,resource,port,0);
+  ui();
   return 0;
 }

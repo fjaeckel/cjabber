@@ -14,30 +14,25 @@
  * along with cjabber; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
+#include <stdio.h>
+#include <sys/ioctl.h>
 
-#include <iksemel.h>
-#include <netdata.h>
+typedef struct winsize wsize;
 
-#define RESOURCE "cjabber"
-#define JABBERID "jabber@localhost"
-#define TIMEOUT 10
+/* this will be the main ui! */
+void create_swindow(int cols, int rows) {
+  puts("main window");
+}
 
-void usage(char *pname);
-int error(char *msg);
+wsize get_termsize() {
+  wsize size;
+  ioctl(0, TIOCGWINSZ, (char *) &size);
+  return size;
+}
 
-int cj_stream();
-iksfilter *cj_filter;
-void setup_filter(netdata *net);
-int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_roster);
-
-int check_state(int state);
-
-iksid *create_id(char *jabberid, netdata *net);
-void presence(netdata *net);
-
-int on_error(void *user_data, ikspak *pak);
-int on_roster(netdata *net, ikspak *pak);
-int on_result(netdata *net, ikspak *pak);
-void on_log (netdata *net, const char *data, size_t size, int is_incoming);
-
-void ui();
+void ui() {
+  wsize size;
+  size = get_termsize();
+  printf("cols: %d rows: %d\n", size.ws_col, size.ws_row);
+  create_swindow(size.ws_col,size.ws_row);    
+}
