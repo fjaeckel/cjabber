@@ -20,11 +20,14 @@ SRC=src
 LIBS=-liksemel
 CFLAGS=-Wall -DDEBUG -Iinclude
 #CFLAGS=-Wall -Iinclude
+OBJ=filter.o hooks.o presence.o cj_connect.o error.o create_id.o check_state.o usage.o ui.o
+
 
 all: cjabber
 
-cjabber: filter.o hooks.o presence.o cj_connect.o main.o error.o create_id.o check_state.o usage.o ui.o
+cjabber: ${OBJ}
 	${CC} -o cjabber ${SRC}/*.o ${LIBS} ${CFLAGS}
+
 ui.o:
 	${CC} -c ${SRC}/ui.c -o ${SRC}/ui.o ${CFLAGS}
 
@@ -52,7 +55,7 @@ check_state.o:
 usage.o:
 	${CC} -c ${SRC}/usage.c -o ${SRC}/usage.o ${CFLAGS}
 
-main.o: filter.o hooks.o presence.o cj_connect.o error.o create_id.o check_state.o usage.o ui.o
+main.o: ${OBJ}
 	${CC} -c ${SRC}/main.c -o ${SRC}/main.o ${CFLAGS}
 
 clean:
