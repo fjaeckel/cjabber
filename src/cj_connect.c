@@ -55,9 +55,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     fgets(password,127,stdin);
     strtok(password,"\r\n");
     printf("%d\n",strlen(password));
-    if (strlen(password)>0 
-            && !strncmp(password,"\0",1) 
-            && !strncmp(password,"\n",1)) {
+    if (strlen(password)>0 ){
       net.password = password;
       printf("password: %s\n",net.password);
     }
