@@ -18,8 +18,8 @@
 CC=gcc
 SRC=src
 LIBS=-liksemel
-#CFLAGS=-Wall -DDEBUG -Iinclude
-CFLAGS=-Wall -Iinclude
+CFLAGS=-Wall -DDEBUG -Iinclude
+#CFLAGS=-Wall -Iinclude
 
 all: cjabber
 

@@ -17,12 +17,13 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <common.h>
 
 /* roster */
-iks *cj_roster;
+iks *cj_roster=NULL;
 
-int sasl_established;
+int sasl_established=0;
 
 /* a hook on error */
 int on_error (void *user_data, ikspak *pak){
@@ -39,7 +40,7 @@ int on_roster (netdata *net, ikspak *pak){
 
 /* a hook, for the results */
 int on_result (netdata *net, ikspak *pak){
-	iks *x;
+	iks *x=NULL;
 	if (net->set_roster == 0){
 		x = iks_make_iq (IKS_TYPE_GET, IKS_NS_ROSTER);
 		iks_insert_attrib (x, "id", "roster");
@@ -155,7 +156,7 @@ int cj_stream(netdata *net,int type, iks *node){
             puts("OK");
       }
       else {
-        ikspak *pak;
+        ikspak *pak=NULL;
         pak = iks_packet(node);
         iks_filter_packet(cj_filter, pak);
 #ifdef DEBUG
@@ -171,7 +172,7 @@ int cj_stream(netdata *net,int type, iks *node){
       error("connection closed.");
       break;
     case IKS_NODE_ERROR:
-      error("error!!2142");
+      error("error!!11oneoneeleven");
       break;
   }
   return IKS_OK;

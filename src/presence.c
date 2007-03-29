@@ -21,7 +21,7 @@
 #include <stdlib.h>
 
 void presence(netdata *net){
-  iks *x;
+  iks *x=NULL;
   printf("[1] free for chat\n"
          "[2] away\n"
          "[3] extended away\n"

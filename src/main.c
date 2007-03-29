@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
   char *jabberid = NULL;
   char *resource = NULL;
   char *password = NULL;
-  int args;
+  int args = 0;
   int port = 0;
   if(argc > 2) {      
     for (args=1; args < argc; args++) {

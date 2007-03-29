@@ -49,7 +49,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
      * maybe I'll change it to a dynamic pointer
      * but for now I'm too lazy. :-P
      */
-    char password[128];
+    char password[128]= {""};
     printf("Enter your password: ");
     fgets(password,127,stdin);
     strtok(password,"\r\n");
@@ -101,13 +101,13 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
 
   while (1) {
 		state = iks_recv (net.parser, 1);
-		if (IKS_HOOK == state)
+		if (state == IKS_HOOK)
       break;
-		if (IKS_NET_TLSFAIL == state) {
+		if (state == IKS_NET_TLSFAIL) {
       error ("tls handshake failed");
       return 1;
     }
-		if (IKS_OK != state) {
+		if (state != IKS_OK) {
       error ("io error");
       return 1;
     }
@@ -122,7 +122,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     iks_recv(net.parser,30);
   }*/
   /* just to see the presence in another roster */
-  sleep(15);
+//  sleep(15);
   
   /* disconnects the parser. */
   printf("disconnecting...");
