@@ -41,3 +41,4 @@ int on_result(netdata *net, ikspak *pak);
 void on_log (netdata *net, const char *data, size_t size, int is_incoming);
 
 void ui();
+char* enter_text(char *text, char *p);

@@ -18,15 +18,18 @@
 CC=gcc
 SRC=src
 LIBS=-liksemel
-CFLAGS=-Wall -DDEBUG -Iinclude
-#CFLAGS=-Wall -Iinclude
-OBJ=filter.o hooks.o presence.o cj_connect.o error.o create_id.o check_state.o usage.o ui.o
+#CFLAGS=-Wall -DDEBUG -Iinclude
+CFLAGS=-Wall -Iinclude
+OBJ=filter.o hooks.o presence.o cj_connect.o error.o create_id.o check_state.o usage.o ui.o input.o
 
 
 all: cjabber
 
-cjabber: ${OBJ}
+cjabber: ${OBJ} main.o
 	${CC} -o cjabber ${SRC}/*.o ${LIBS} ${CFLAGS}
+
+input.o:
+	${CC} -c ${SRC}/input.c -o ${SRC}/input.o ${CFLAGS}
 
 ui.o:
 	${CC} -c ${SRC}/ui.c -o ${SRC}/ui.o ${CFLAGS}

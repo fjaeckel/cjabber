@@ -27,6 +27,7 @@
  */
 int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_roster) {
   int state=0;
+  char *password=NULL;
   netdata net;
   /* create a new stream on the parser */
   net.parser = iks_stream_new(IKS_NS_CLIENT, &net, (iksStreamHook *) cj_stream);
@@ -44,20 +45,11 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
           && !strncmp(pass,"\n",1))
     net.password = pass;
   else {
-    /*
-     * FIXME: I WANT TO BE FIXED!!!111oneoneeleven
-     * Y? cause theres a buffer overflow possible
-     * which ends in a SIGSEGV. Maybe it's useable
-     * to provide executeable code.
-     */
-    char password[128]= {""};
-    printf("Enter your password: ");
-    fgets(password,127,stdin);
-    strtok(password,"\r\n");
-    printf("%d\n",strlen(password));
-    if (strlen(password)>0 ){
-      net.password = password;
-      printf("password: %s\n",net.password);
+      /* enter your password! :-) */
+    password=enter_text("password: ",password);
+    if (strlen(password)>0 && password != NULL){
+        net.password = password;
+        printf("password: %s\n",net.password);
     }
     else {
       error("no or too short password specified");
@@ -123,7 +115,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     iks_recv(net.parser,30);
   }*/
   /* just to see the presence in another roster */
-//  sleep(15);
+  sleep(5);
   
   /* disconnects the parser. */
   printf("disconnecting...");

@@ -15,13 +15,17 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #include <stdio.h>
+#include <string.h>
 #include <sys/ioctl.h>
 
 typedef struct winsize wsize;
 
 /* this will be the main ui! */
-void create_swindow(int cols, int rows) {
-  puts("main window");
+void create_swindow(int cols, int row) {
+  int columns=0;
+  for (columns=cols; columns>0; columns--){
+      printf("-");
+  }
 }
 
 wsize get_termsize() {
@@ -33,6 +37,5 @@ wsize get_termsize() {
 void ui() {
   wsize size;
   size = get_termsize();
-  printf("cols: %d rows: %d\n", size.ws_col, size.ws_row);
   create_swindow(size.ws_col,size.ws_row);    
 }
