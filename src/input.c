@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <common.h>
 
 #define BUFSIZE 128
 
@@ -43,33 +44,20 @@ char* enter_text(char *text, char *p) {
   write(STDOUT_FILENO,text,strlen(text));
   while((ret = read(STDIN_FILENO,buf,BUFSIZE))){ 
     if(ret == -1) {     /* if ret is -1 something failed. */
-      switch(errno) {
-          case EAGAIN:
-              write(STDOUT_FILENO,"O_NONBLOCK specified..",23);
-              break;
-          case EBADF:
-              write(STDOUT_FILENO,"fd is not a valid filedescriptor",33);
-              break;
-          case EFAULT:
-              write(STDOUT_FILENO,"buf is outside our accessible address space.",44);
-              break;
-          case EINTR:
-              write(STDOUT_FILENO,"The call was interrupted by a signal before any data was read.",62);
-              break;
-          case EINVAL:
-              write(STDOUT_FILENO,"opened with O_DIRECT, address is specified in buf or fd is attached to an unsuitable object.",92);
-              break;
-          case EIO:
-              write(STDOUT_FILENO,"I/O Error",9);
-              break;
-          case EISDIR:
-              write(STDOUT_FILENO,"fd refers to a directory",24);
-              break;
-          default:
-              write(STDOUT_FILENO,"WAH! SOMETHING WEIRD HAPPENED!\0",32);
-              break;
-      }
-      break;
+        /* 
+         * FIXME: Something weird happens on ret = -1.
+         * don't know why errno can't be given as an arg.
+         * same as:
+         * int foo = errno;
+         * check_errno(foo);
+         * does not work.
+         *
+         * BULLSHIT :-P
+         */
+        printf("errno: %d\n",errno);
+        check_errno(errno);
+        if (errno != 0)
+            break;
     }
     cnt+=ret;         /* increment cnt with the content of ret */
     q=p;              /* assign the backup pointer */

@@ -18,8 +18,8 @@
 CC=gcc
 SRC=src
 LIBS=-liksemel
-CFLAGS=-Wall -DDEBUG -Iinclude
-#CFLAGS=-Wall -Iinclude
+#CFLAGS=-Wall -DDEBUG -Iinclude
+CFLAGS=-Wall -Iinclude
 OBJ=filter.o hooks.o presence.o cj_connect.o error.o create_id.o check_state.o usage.o ui.o input.o
 
 
