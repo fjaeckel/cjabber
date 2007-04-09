@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <errno.h>
+#include <error.h>
 
 /*
  * a simple error function..
@@ -32,35 +33,35 @@ int check_errno(int errornumber) {
   printf("errno: %d\n",errornumber);
   switch(errornumber) {
     case EAGAIN:
-        write(STDOUT_FILENO,"O_NONBLOCK specified..",23);
+        write(STDOUT_FILENO,ERR_AGAIN,sizeof(ERR_AGAIN));
         return 1;
         break;
     case EBADF:
-        write(STDOUT_FILENO,"fd is not a valid filedescriptor",33);
+        write(STDOUT_FILENO,ERR_BADF,sizeof(ERR_BADF));
         return 1;
         break;
     case EFAULT:
-        write(STDOUT_FILENO,"buf is outside our accessible address space.",44);
+        write(STDOUT_FILENO,ERR_FAULT,sizeof(ERR_FAULT));
         return 1;
         break;
     case EINTR:
-        write(STDOUT_FILENO,"The call was interrupted by a signal before any data was read.",62);
+        write(STDOUT_FILENO,ERR_INTR,sizeof(ERR_INTR));
         return 1;
         break;
     case EINVAL:
-        write(STDOUT_FILENO,"opened with O_DIRECT, address is specified in buf or fd is attached to an unsuitable object.",92);
+        write(STDOUT_FILENO,ERR_INVAL,sizeof(ERR_INVAL));
         return 1;
         break;
     case EIO:
-        write(STDOUT_FILENO,"I/O Error",9);
+        write(STDOUT_FILENO,ERR_IO,sizeof(ERR_IO));
         return 1;
         break;
     case EISDIR:
-        write(STDOUT_FILENO,"fd refers to a directory",24);
+        write(STDOUT_FILENO,ERR_ISDIR,sizeof(ERR_ISDIR));
         return 1;
         break;
     default:
-        write(STDOUT_FILENO,"WAH! SOMETHING WEIRD HAPPENED!\0",32);
+        write(STDOUT_FILENO,"WAH! SOMETHING WEIRD HAPPENED!",32);
         return 1;
   }
   return 0;

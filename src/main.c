@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <common.h>
+#include <error.h>
 
 int main(int argc, char *argv[]) {
   char *jabberid = NULL;
@@ -68,11 +69,10 @@ int main(int argc, char *argv[]) {
       }
     }
   }
-
   /*
    * connect, d00d! :-D
    */
   cj_connect(jabberid,password,resource,port,0);
-//  ui();
+  ui();
   return 0;
 }

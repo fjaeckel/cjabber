@@ -3,7 +3,7 @@
 #define ERR_ADDRINUSE     "Address already in use"
 #define ERR_ADDRNOTAVAIL  "Address not available"
 #define ERR_AFNOSUPPORT   "Address family not supported"
-#define ERR_AGAIN         "Resource  temporarily  unavailable"
+#define ERR_AGAIN         "Resource temporarily unavailable"
 #define ERR_ALREADY       "Connection already in progress"
 #define ERR_BADE          "Invalid exchange"
 #define ERR_BADF          "Bad file descriptor"
