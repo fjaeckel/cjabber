@@ -28,9 +28,9 @@ int error(char *msg) {
   return 1;
 }
 
-int check_errno(int errno) {
-  printf("errno: %d\n",errno);
-  switch(errno) {
+int check_errno(int errornumber) {
+  printf("errno: %d\n",errornumber);
+  switch(errornumber) {
     case EAGAIN:
         write(STDOUT_FILENO,"O_NONBLOCK specified..",23);
         return 1;
@@ -62,7 +62,6 @@ int check_errno(int errno) {
     default:
         write(STDOUT_FILENO,"WAH! SOMETHING WEIRD HAPPENED!\0",32);
         return 1;
-        break;
   }
   return 0;
 }

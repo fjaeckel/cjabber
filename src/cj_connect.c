@@ -43,7 +43,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
   if(pass && strlen(pass)>0) 
     net.password = pass;
   else {
-      /* enter your password! :-) */
+    /* enter your password! :-) */
     password=enter_text("password: ",password);
     if (strlen(password)>0 && password != NULL){
         net.password = password;

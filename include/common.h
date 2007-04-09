@@ -24,7 +24,7 @@
 
 void usage(char *pname);
 int error(char *msg);
-int check_errno(int errno);
+int check_errno(int errornumber);
 
 int cj_stream();
 iksfilter *cj_filter;

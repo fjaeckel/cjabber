@@ -40,24 +40,15 @@ char* enter_text(char *text, char *p) {
   int cnt=0;          /* the count for allocating the memory */
   char buf[BUFSIZE];  /* our buffer, BUFSIZE big */
   char *q=NULL;       /* a backup pointer if realloc() fails */
+  int errornumber=0;
 
   write(STDOUT_FILENO,text,strlen(text));
-  while((ret = read(STDIN_FILENO,buf,BUFSIZE))){ 
-    if(ret == -1) {     /* if ret is -1 something failed. */
-        /* 
-         * FIXME: Something weird happens on ret = -1.
-         * don't know why errno can't be given as an arg.
-         * same as:
-         * int foo = errno;
-         * check_errno(foo);
-         * does not work.
-         *
-         * BULLSHIT :-P
-         */
+  while((ret = read(STDIN_FILENO,buf,BUFSIZE)) && buf[cnt-1] != '\n'){
+    if(ret == -1) {     /* if ret is -1 something is wrong. */
         printf("errno: %d\n",errno);
-        check_errno(errno);
-        if (errno != 0)
-            break;
+        errornumber = errno;
+        if (check_errno(errornumber) != 0)
+            return NULL;
     }
     cnt+=ret;         /* increment cnt with the content of ret */
     q=p;              /* assign the backup pointer */
