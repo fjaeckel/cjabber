@@ -48,6 +48,8 @@ void presence(netdata *net){
     case 5:
         x = iks_make_pres(IKS_SHOW_UNAVAILABLE,"");
         break;
+    case 0:
+        break;
     default:
         break;
   }
