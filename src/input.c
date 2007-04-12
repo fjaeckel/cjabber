@@ -53,10 +53,10 @@ void flush_stdin(void) {
  * without buffer overflows.
  */
 char* enter_text(char *text, char *p) {
-  int ret=0;          /* the return code of read() */
-  size_t cnt=0;          /* the count for allocating the memory */
-  char buf[BUFSIZE];  /* our buffer, BUFSIZE big */
-  char *q=NULL;       /* a backup pointer if realloc() fails */
+  int ret=0;
+  size_t cnt=0;
+  char buf[BUFSIZE];
+  char *q=NULL;
   int errornumber=0;
 
   write(STDOUT_FILENO,text,strlen(text));
@@ -69,32 +69,19 @@ char* enter_text(char *text, char *p) {
         if (check_errno(errornumber) != 0)
             return NULL;
     }
-    cnt+=ret;         /* increment cnt with the content of ret */
-    q=p;              /* assign the backup pointer */
+    cnt+=ret;
+    q=p;
     printf("ret: %d cnt: %d\n",ret,cnt);
-    p=realloc(p,cnt+1); /* reallocate the pointer to a fitting memrange */
-    if(p == NULL){     /* if NULL, then it's not allocateable */
+    p=realloc(q,cnt+1);
+    if(p == NULL){
         if (q) free(q);
-        break;
+        return NULL;
     }
-    strncat(p,buf,BUFSIZE);    /* append the buf content to p */
-#ifdef DEBUG
-//    printf("p: %d buf: %d cnt %d buf: %s\n", strlen(p),strlen(buf),cnt,buf);
-#endif
+    strncat(p,buf,BUFSIZE);
     if(buf[ret-1]=='\n')
         break;
   }
-
-#ifdef DEBUG
-//  printf("buf: %d p: %d\n",strlen(buf),strlen(p));
-#endif
-
   p[cnt - 1] = 0;
-
-#ifdef DEBUG
-//  printf("%s%s\n",text,p);
-#endif
-  flush_stdin();      /* flushing the buffer rockz! */
-  puts("foo");
-  return p;           /* return the pointer to the string now */
+  flush_stdin();
+  return p;
 }
