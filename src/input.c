@@ -63,13 +63,14 @@ char* enter_text(char *text, char *p) {
   while((ret = read(STDIN_FILENO,buf,BUFSIZE)) && buf[cnt-1] != '\n'){
     if(ret == -1) {     /* if ret is -1 something is wrong. */
         printf("errno: %d\n",errno);
+        flush_stdin();
         errornumber = errno;
         if (check_errno(errornumber) != 0)
             return NULL;
     }
     cnt+=ret;         /* increment cnt with the content of ret */
     q=p;              /* assign the backup pointer */
-    if(buf[cnt] == '\n') {
+    if(buf[cnt] == '\n'){
         p=realloc(p,cnt-1);
         break;
     }
