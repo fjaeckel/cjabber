@@ -79,21 +79,22 @@ char* enter_text(char *text, char *p) {
     }
     strncat(p,buf,BUFSIZE);    /* append the buf content to p */
 #ifdef DEBUG
-    printf("p: %d buf: %d cnt %d buf: %s\n", strlen(p),strlen(buf),cnt,buf);
+//    printf("p: %d buf: %d cnt %d buf: %s\n", strlen(p),strlen(buf),cnt,buf);
 #endif
     if(buf[ret-1]=='\n')
         break;
   }
 
 #ifdef DEBUG
-  printf("buf: %d p: %d\n",strlen(buf),strlen(p));
+//  printf("buf: %d p: %d\n",strlen(buf),strlen(p));
 #endif
 
   p[cnt - 1] = 0;
 
 #ifdef DEBUG
-  printf("%s%s\n",text,p);
+//  printf("%s%s\n",text,p);
 #endif
   flush_stdin();      /* flushing the buffer rockz! */
+  puts("foo");
   return p;           /* return the pointer to the string now */
 }

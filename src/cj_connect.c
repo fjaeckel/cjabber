@@ -44,9 +44,10 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     net.password = pass;
   else {
     /* enter your password! :-) */
-    password=enter_text("password: ",password);
-    if (strlen(password)>0 && password != NULL){
-        net.password = password;
+      net.password=NULL;
+    if ((net.password=enter_text("password: ",net.password))!=NULL){
+//    if (strlen(password)>0 && password != NULL){
+//        net.password = password;
         printf("password: %s\n",net.password);
     }
     else {
@@ -64,18 +65,17 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     net.id->resource = RESOURCE;
   else
     net.id->resource = resource;
-
   /* just a boring message.. ;-) */
   printf("Connecting to '%s'...", net.id->server);
-  
   /* setup the filter for the auth! */
   setup_filter (&net);
+  puts("foo");
   /* try to connect to the remote server */
   if(port == 0 && !port)
     state = iks_connect_tcp(net.parser, net.id->server, IKS_JABBER_PORT);
   else
     state = iks_connect_tcp(net.parser, net.id->server, port);
-
+  puts("foo");
   /* check wether the connection is established or not. */
   if (check_state(state)){
     error("something with the connection went wrong");
