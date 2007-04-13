@@ -77,11 +77,12 @@ char* enter_text(char *text, char *p) {
         if (q) free(q);
         return NULL;
     }
-    strncat(p,buf,BUFSIZE);
+    strncat(p,buf,cnt - strlen(p));
     if(buf[ret-1]=='\n')
         break;
   }
   p[cnt - 1] = 0;
+
   flush_stdin();
   return p;
 }

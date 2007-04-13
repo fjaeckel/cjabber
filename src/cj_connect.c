@@ -27,7 +27,6 @@
  */
 int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_roster) {
   int state=0;
-  char *password=NULL;
   netdata net;
   /* create a new stream on the parser */
   net.parser = iks_stream_new(IKS_NS_CLIENT, &net, (iksStreamHook *) cj_stream);
@@ -44,10 +43,8 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     net.password = pass;
   else {
     /* enter your password! :-) */
-      net.password=NULL;
+    net.password=NULL;
     if ((net.password=enter_text("password: ",net.password))!=NULL){
-//    if (strlen(password)>0 && password != NULL){
-//        net.password = password;
         printf("password: %s\n",net.password);
     }
     else {
@@ -69,13 +66,17 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
   printf("Connecting to '%s'...", net.id->server);
   /* setup the filter for the auth! */
   setup_filter (&net);
-  puts("foo");
   /* try to connect to the remote server */
+#ifdef DEBUG
+  printf("username: %s\nserver: %s\nresource: %s\npartial: %s\nfull: %s\npassword: %s\n",
+    net.id->user, net.id->server, net.id->resource, net.id->partial,
+    net.id->full, net.password);
+#endif
+
   if(port == 0 && !port)
     state = iks_connect_tcp(net.parser, net.id->server, IKS_JABBER_PORT);
   else
     state = iks_connect_tcp(net.parser, net.id->server, port);
-  puts("foo");
   /* check wether the connection is established or not. */
   if (check_state(state)){
     error("something with the connection went wrong");
