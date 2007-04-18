@@ -18,6 +18,8 @@
 #include <common.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 /*
  * the connection routine for connecting to the server,
@@ -38,7 +40,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
   /* 
    * yes, for now I forbid passwords <=0 character. 
    */
-  if(pass && strlen(pass)>0) 
+  if(pass) 
     net.password = pass;
   else {
     /* enter your password! :-) */
