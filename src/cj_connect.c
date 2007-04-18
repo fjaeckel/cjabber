@@ -37,9 +37,6 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     puts("net.parser initiated.");
 #endif
   
-  /* 
-   * yes, for now I forbid passwords <=0 character. 
-   */
   if(pass) 
     net.password = pass;
   else {
