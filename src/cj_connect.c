@@ -61,10 +61,15 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     net.id->resource = RESOURCE;
   else
     net.id->resource = resource;
+
   /* just a boring message.. ;-) */
   printf("Connecting to '%s'...", net.id->server);
-  /* setup the filter for the auth! */
+
+  /* 
+   * setup the filter for the authentication process.
+   */
   setup_filter (&net);
+
   /* try to connect to the remote server */
 #ifdef DEBUG
   printf("username: %s\nserver: %s\nresource: %s\npartial: %s\nfull: %s\npassword: %s\n",
