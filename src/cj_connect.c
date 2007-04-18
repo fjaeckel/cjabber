@@ -29,6 +29,7 @@
 int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_roster) {
   int state=0;
   netdata net;
+
   /* create a new stream on the parser */
   net.parser = iks_stream_new(IKS_NS_CLIENT, &net, (iksStreamHook *) cj_stream);
 #ifdef DEBUG
