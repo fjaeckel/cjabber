@@ -21,7 +21,6 @@
 
 typedef struct winsize wsize;
 
-/* this will be the main ui! */
 void create_swindow(int cols, int row) {
   int columns=0;
   for (columns=cols; columns>0; columns--){
