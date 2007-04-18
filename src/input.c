@@ -76,12 +76,12 @@ char* enter_text(char *text, char *p) {
     printf("ret: %d cnt: %d\n",ret,cnt);
     p=realloc(q,cnt+1);
     if(p == NULL){
-        if (q) free(q);
-        return NULL;
+      if (q) free(q);
+      return NULL;
     }
     strncat(p,buf,cnt - strlen(p));
     if(buf[ret-1]=='\n')
-        break;
+      break;
   }
   p[cnt - 1] = 0;
 
