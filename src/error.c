@@ -17,7 +17,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <errno.h>
-#include <error.h>
 
 /*
  * a simple error function..

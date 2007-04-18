@@ -22,16 +22,21 @@
 
 void presence(netdata *net){
   iks *x=NULL;
+  char *p=NULL;
   printf("[1] free for chat\n"
          "[2] away\n"
          "[3] extended away\n"
          "[4] dnd\n"
          "[0] unavailable\n"
-         "----------------\n"
+//         "----------------\n");
+         "------------------\n"         
          "select your presence state: ");
   char buf[2];
   fgets(buf,2,stdin);
   strtok(buf,"\r\n");
+//  p=enter_text("select your presence state: ",p);
+//  printf("%s\n",p);
+//  sleep(5);
   switch(atoi(buf)) {
     case 1:
         x = iks_make_pres(IKS_SHOW_CHAT,"");
