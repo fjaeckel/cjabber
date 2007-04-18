@@ -62,14 +62,14 @@ char* enter_text(char *text, char *p) {
   write(STDOUT_FILENO,text,strlen(text));
   while((ret = read(STDIN_FILENO,buf,BUFSIZE))){
     if(ret == -1) {
-        if (p) free(p);
+      if (p) free(p);
 #ifdef DEBUG
-        printf("errno: %d\n",errno);
+      printf("errno: %d\n",errno);
 #endif
-        flush_stdin();
-        errornumber = errno;
-        if (check_errno(errornumber) != 0)
-            return NULL;
+      flush_stdin();
+      errornumber = errno;
+      if (check_errno(errornumber) != 0)
+        return NULL;
     }
     cnt+=ret;
     q=p;
