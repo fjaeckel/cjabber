@@ -31,7 +31,7 @@
  */
 void flush_stdin(void) {
     /* 
-     * get filestatus flag for resuming late to the old state
+     * get filestatus flag for resuming later to the old state
      */
     int oldstat = fcntl(STDIN_FILENO, F_GETFL, 0); 
     /*
