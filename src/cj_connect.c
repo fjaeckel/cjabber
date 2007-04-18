@@ -123,9 +123,11 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
   printf("disconnecting...");
   iks_disconnect(net.parser);
   puts("OK");
+
   /* deletes the parser.. */
   printf("deleting parser...");
   iks_parser_delete(net.parser);
   puts("OK");
+
   return 0;
 }
