@@ -81,6 +81,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     state = iks_connect_tcp(net.parser, net.id->server, IKS_JABBER_PORT);
   else
     state = iks_connect_tcp(net.parser, net.id->server, port);
+
   /* check wether the connection is established or not. */
   if (check_state(state)){
     error("something with the connection went wrong");
@@ -114,9 +115,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     }
 	}
   presence(&net);
-  /*/while(net.parser){
-    iks_recv(net.parser,30);
-  }*/
+
   /* just to see the presence in another roster */
   sleep(5);
   
