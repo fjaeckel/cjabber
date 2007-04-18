@@ -31,6 +31,11 @@ int error(char *msg) {
   return 1;
 }
 
+
+/*
+ * this function checks errno and prints the 
+ * description for it on stderr/stdout.
+ */
 int check_errno(int errornumber) {
   char buf[256];
 #ifdef DEBUG
