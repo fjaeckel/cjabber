@@ -15,8 +15,11 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <errno.h>
+
+#define WEIRDERROR  "Something weird happened. RTFS.\n"
 
 /*
  * a simple error function..
@@ -29,39 +32,19 @@ int error(char *msg) {
 }
 
 int check_errno(int errornumber) {
+  char buf[256];
+#ifdef DEBUG
   printf("errno: %d\n",errornumber);
-  switch(errornumber) {
-    case EAGAIN:
-        write(STDOUT_FILENO,ERR_AGAIN,sizeof(ERR_AGAIN));
-        return 1;
-        break;
-    case EBADF:
-        write(STDOUT_FILENO,ERR_BADF,sizeof(ERR_BADF));
-        return 1;
-        break;
-    case EFAULT:
-        write(STDOUT_FILENO,ERR_FAULT,sizeof(ERR_FAULT));
-        return 1;
-        break;
-    case EINTR:
-        write(STDOUT_FILENO,ERR_INTR,sizeof(ERR_INTR));
-        return 1;
-        break;
-    case EINVAL:
-        write(STDOUT_FILENO,ERR_INVAL,sizeof(ERR_INVAL));
-        return 1;
-        break;
-    case EIO:
-        write(STDOUT_FILENO,ERR_IO,sizeof(ERR_IO));
-        return 1;
-        break;
-    case EISDIR:
-        write(STDOUT_FILENO,ERR_ISDIR,sizeof(ERR_ISDIR));
-        return 1;
-        break;
-    default:
-        write(STDOUT_FILENO,"WAH! SOMETHING WEIRD HAPPENED!",32);
-        return 1;
+#endif
+  if (errornumber>0){
+      strerror_r(errornumber,buf,sizeof(buf));
+    write(STDOUT_FILENO,buf,strlen(buf));
+    write(STDOUT_FILENO,"\n",1);
+    return 1;
+  }
+  else {
+      write(STDOUT_FILENO,WEIRDERROR,strlen(WEIRDERROR));
+      return 1;
   }
   return 0;
 }

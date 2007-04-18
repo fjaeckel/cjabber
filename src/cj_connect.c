@@ -48,7 +48,7 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
     }
     else {
       error("no or too short password specified");
-      return 1;
+      exit(1);
     }
   }
   net.set_roster = set_roster;

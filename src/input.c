@@ -61,9 +61,13 @@ char* enter_text(char *text, char *p) {
 
   write(STDOUT_FILENO,text,strlen(text));
   while((ret = read(STDIN_FILENO,buf,BUFSIZE))){
+      ret=-1;
+      errno=E2BIG;
     if(ret == -1) {     /* if ret is -1 something is wrong. */
         if (p) free(p);
+#ifdef DEBUG
         printf("errno: %d\n",errno);
+#endif
         flush_stdin();
         errornumber = errno;
         if (check_errno(errornumber) != 0)
