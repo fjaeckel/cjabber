@@ -172,7 +172,7 @@ int cj_stream(netdata *net,int type, iks *node){
       error("connection closed.");
       break;
     case IKS_NODE_ERROR:
-      error("error!!11oneoneeleven");
+      error("got a <stream:error> tag");
       break;
   }
   return IKS_OK;
