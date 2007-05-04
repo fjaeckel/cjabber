@@ -114,8 +114,8 @@ int cj_connect(char *jabberid, char *pass, char *resource, int port, int set_ros
       return 1;
     }
 	}
-  presence(&net);
-
+  //presence(&net);
+  ui(&net);
   /* just to see the presence in another roster */
   sleep(5);
   

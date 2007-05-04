@@ -34,6 +34,8 @@ int on_error (void *user_data, ikspak *pak){
 /* a hook for the roster */
 int on_roster (netdata *net, ikspak *pak){
 	cj_roster = pak->x;
+  if(pak->type == IKS_PAK_IQ)
+      puts("its a roster...");
 	net->job_done = 1;
 	return IKS_FILTER_EAT;
 }

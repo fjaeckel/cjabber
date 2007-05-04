@@ -27,6 +27,8 @@ struct netdata {
   int job_done;
   int features;
   int authorized;
+  long pres_state;
+  char *tmp;
 };
 
 typedef struct netdata netdata;

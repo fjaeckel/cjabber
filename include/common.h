@@ -35,11 +35,16 @@ int check_state(int state);
 
 iksid *create_id(char *jabberid, netdata *net);
 void presence(netdata *net);
+void set_presence_offline(netdata *net);
 
 int on_error(void *user_data, ikspak *pak);
 int on_roster(netdata *net, ikspak *pak);
 int on_result(netdata *net, ikspak *pak);
 void on_log (netdata *net, const char *data, size_t size, int is_incoming);
 
-void ui();
+void ui(netdata *net);
 char* enter_text(char *text, char *p);
+void flush_stdin(void);
+void menu(netdata *net);
+void create_msg(netdata *net);
+void show_roster(netdata *net);

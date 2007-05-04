@@ -20,22 +20,49 @@
 #include <string.h>
 #include <stdlib.h>
 
-void presence(netdata *net){
+/*struct bla {
+    char  *tmp;
+};*/
+
+void set_presence_offline(netdata *net){
   iks *x=NULL;
-  printf("[1] free for chat\n"
-         "[2] away\n"
-         "[3] extended away\n"
-         "[4] dnd\n"
-         "[0] unavailable\n"
-//         "----------------\n");
-         "------------------\n"         
-         "select your presence state: ");
+  x=iks_make_pres(IKS_SHOW_UNAVAILABLE,"");
+  if(x!=NULL){
+      iks_send(net->parser,x);
+  }
+}
+
+void presence(netdata *net){
+//  struct bla foo;
+  iks *x=NULL;
+/*  char *endptr=NULL;
+  foo.tmp=NULL;
+  foo.tmp=enter_text("[1] free for chat\n"
+                 "[2] away\n"
+                 "[3] extended away\n"
+                 "[4] dnd\n"
+                 "[5] unavailable\n------------------\n"
+                 "select your presence state: ",foo.tmp);
+
+  net->pres_state=strtol(foo.tmp,&endptr,10);
+  printf("%s, %ld\n",foo.tmp,net->pres_state);
+*/
+//  if (foo) free(foo);
+
+  /*
+   * dirty code, but efficient code.
+   * stfu if you don't like it.. i'll fix it in the future.
+   */
+  flush_stdin();
   char buf[2];
+  printf("[1] free for chat\n"
+                 "[2] away\n"
+                 "[3] extended away\n"
+                 "[4] dnd\n"
+                 "[5] unavailable\n------------------\n"
+                 "select your presence state: ");
   fgets(buf,2,stdin);
   strtok(buf,"\r\n");
-//  p=enter_text("select your presence state: ",p);
-//  printf("%s\n",p);
-//  sleep(5);
   switch(atoi(buf)) {
     case 1:
         x = iks_make_pres(IKS_SHOW_CHAT,"");
@@ -52,10 +79,10 @@ void presence(netdata *net){
     case 5:
         x = iks_make_pres(IKS_SHOW_UNAVAILABLE,"");
         break;
-    case 0:
-        break;
     default:
         break;
   }
-  iks_send(net->parser,x);
+  if(x!=NULL) {
+    iks_send(net->parser,x);
+  }
 }

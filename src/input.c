@@ -59,6 +59,8 @@ char* enter_text(char *text, char *p) {
   char *q=NULL;
   int errornumber=0;
 
+  printf("%p\n",p);
+
   write(STDOUT_FILENO,text,strlen(text));
   while((ret = read(STDIN_FILENO,buf,BUFSIZE))){
     if(ret == -1) {
@@ -73,17 +75,21 @@ char* enter_text(char *text, char *p) {
     }
     cnt+=ret;
     q=p;
+#ifdef DEBUG
     printf("ret: %d cnt: %d\n",ret,cnt);
+    printf("p: %s\n",p);
+#endif
     p=realloc(q,cnt+1);
     if(p == NULL){
       if (q) free(q);
       return NULL;
     }
-    strncat(p,buf,cnt - strlen(p));
+//    strncat(p,buf,cnt - strlen(p));
+    strncat(p,buf,ret);    
     if(buf[ret-1]=='\n')
       break;
   }
-  p[cnt - 1] = 0;
+  p[cnt-1] = 0;
 
   flush_stdin();
   return p;
