@@ -22,6 +22,8 @@
 #define JABBERID "jabber@localhost"
 #define TIMEOUT 10
 
+typedef struct winsize wsize;
+
 void usage(char *pname);
 int error(char *msg);
 int check_errno(int errornumber);
@@ -45,6 +47,6 @@ void on_log (netdata *net, const char *data, size_t size, int is_incoming);
 void ui(netdata *net);
 char* enter_text(char *text, char *p);
 void flush_stdin(void);
-void menu(netdata *net);
+void menu(netdata *net,wsize size);
 void create_msg(netdata *net);
 void show_roster(netdata *net);

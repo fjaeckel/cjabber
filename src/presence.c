@@ -85,4 +85,13 @@ void presence(netdata *net){
   if(x!=NULL) {
     iks_send(net->parser,x);
   }
+  /*
+   * FIXME:
+   * if you set the presence state and request the roster later
+   * on, you'll get the presence states of your roster participants.
+   * This is not, what I want. I'll have to fix this, with a weird
+   * iks_recv() until there is no presence message left or something
+   * weird like this. Maybe I'll use this information to represent the
+   * existing roster in the UI.
+   */
 }

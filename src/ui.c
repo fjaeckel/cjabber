@@ -22,8 +22,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-typedef struct winsize wsize;
-
 void create_swindow(int cols, int row) {
   int columns=0;
   for (columns=cols; columns>0; columns--){
@@ -40,7 +38,7 @@ wsize get_termsize() {
 void ui(netdata *net) {
   wsize size;
   size = get_termsize();
-  menu(net);
+  menu(net,size);
   create_swindow(size.ws_col,size.ws_row);    
 }
 
@@ -54,7 +52,7 @@ void show_roster(netdata *net) {
     iks_recv(net->parser,1);
 }
 
-void menu(netdata *net) {
+void menu(netdata *net,wsize size) {
 //  char *myptr=NULL;
   char buf[2];
 /*  char *endptr=NULL;
@@ -73,6 +71,7 @@ void menu(netdata *net) {
    // if (ptr!=NULL) free(ptr);*/
   while (atoi(buf) != 9) {
     flush_stdin();
+    create_swindow(size.ws_col,size.ws_row);
     printf("[1] send a message\n"
            "[2] show the roster\n"
            "[3] set your presence state\n"
