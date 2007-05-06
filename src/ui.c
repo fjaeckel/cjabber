@@ -43,13 +43,17 @@ void ui(netdata *net) {
 }
 
 void create_msg(netdata *net) {
+  iks *x=NULL;
+  x=iks_make_msg(IKS_TYPE_NONE,"jabber@localhost","ya better stfu.");
+  iks_send(net->parser,x);
 }
 
 void show_roster(netdata *net) {
     iks *x=NULL;
-    x=iks_make_iq(IKS_TYPE_GET,"jabber:iq:roster");
-    iks_send(net->parser,x);
-    iks_recv(net->parser,1);
+    x = iks_make_iq (IKS_TYPE_GET, IKS_NS_ROSTER);
+    iks_insert_attrib (x, "id", "roster");
+    iks_send (net->parser, x);
+    iks_recv(net->parser,-1);
 }
 
 void menu(netdata *net,wsize size) {
