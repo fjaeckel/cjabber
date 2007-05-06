@@ -84,7 +84,6 @@ char* enter_text(char *text, char *p) {
       if (q) free(q);
       return NULL;
     }
-//    strncat(p,buf,cnt - strlen(p));
     strncat(p,buf,ret);    
     if(buf[ret-1]=='\n')
       break;
