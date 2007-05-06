@@ -20,6 +20,10 @@
 #include <string.h>
 #include <stdlib.h>
 
+/*
+ * we want to simply the the presence state to offline
+ * if we want to disconnect or do some other things.
+ */
 void set_presence_offline(netdata *net){
   iks *x=NULL;
   x=iks_make_pres(IKS_SHOW_UNAVAILABLE,"");
@@ -28,6 +32,12 @@ void set_presence_offline(netdata *net){
   }
 }
 
+/*
+ * Actually a menu based interface for setting the presence state
+ * this will be changed in the future, while the whole UI will be changed.
+ * Nevermind, it will be more comfortable to use presence states with
+ * comandline comands in the client.
+ */
 void presence(netdata *net){
   iks *x=NULL;
   
