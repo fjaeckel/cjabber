@@ -55,6 +55,9 @@ int on_result (netdata *net, ikspak *pak){
 	return IKS_FILTER_EAT;
 }
 
+/*
+ * a simple log hook, which displays all xmpp traffic in DEBUG mode. ;-)
+ */
 void on_log (netdata *net, const char *data, size_t size, int is_incoming) {
 	if (iks_is_secure (net->parser)) 
       fprintf (stderr, "Sec\n");
@@ -65,6 +68,12 @@ void on_log (netdata *net, const char *data, size_t size, int is_incoming) {
 	fprintf (stderr, "[%s]\n", data);
 }
 
+/*
+ * a general hook function to be there for the authentification process,
+ * some basic rules for the communication process and many more..
+ * actually I don't know how long this hook works and when this hook will be
+ * there for some other communication dialogs.
+ */
 int cj_stream(netdata *net,int type, iks *node){
   switch(type) {
     case IKS_NODE_START:
