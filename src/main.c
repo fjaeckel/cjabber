@@ -25,6 +25,15 @@
 #include <string.h>
 #include <common.h>
 
+/*
+ * it parses the commandline arguments and connects to the server
+ * given in the userid.
+ * the main program accepts the arguments:
+ *    -u user@host, the default is jabber@localhost
+ *    -p port in a whole number, the default is 5222
+ *    -r resource name, the default is 'cjabber'
+ *    -pw your password in ascii form
+ */
 int main(int argc, char *argv[]) {
   char *jabberid = NULL;
   char *resource = NULL;
