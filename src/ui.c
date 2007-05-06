@@ -22,19 +22,34 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void create_swindow(int cols, int row) {
+/*
+ * A general function which draws a horizontal bar of minus
+ * symbols as wide as the terminal is. The terminal size is
+ * defined with the arguments cols and rows.
+ */
+void create_swindow(int cols, int rows) {
   int columns=0;
   for (columns=cols; columns>0; columns--){
       write(0,"-",1);
   }
 }
 
+/*
+ * A function to get the actual terminal size. It returns
+ * the size in a struct wsize with the members ws_col and
+ * ws_row.
+ */
 wsize get_termsize() {
   wsize size;
   ioctl(0, TIOCGWINSZ, (char *) &size);
   return size;
 }
 
+/*
+ * A commmon constructor for the userinterface.
+ * Basicly it draws the menu and a horizontal bar of 
+ * minus symbols.
+ */
 void ui(netdata *net) {
   wsize size;
   size = get_termsize();
@@ -42,12 +57,36 @@ void ui(netdata *net) {
   create_swindow(size.ws_col,size.ws_row);    
 }
 
+/*
+ * This will be the function to create messages to other roster
+ * participants.
+ * Actually it only sends a basic message to jabber@localhost.
+ * TODO:
+ *  - build flexible messages of all kind of types
+ *  - interactive selection of the roster participant
+ *  - interactive text input
+ */
 void create_msg(netdata *net) {
   iks *x=NULL;
   x=iks_make_msg(IKS_TYPE_NONE,"jabber@localhost","ya better stfu.");
   iks_send(net->parser,x);
 }
 
+/*
+ * This will be the function to display the whole roster.
+ * It sends a roster request to the connected server and 
+ * receives the answer with all roster items from the server.
+ * It will show the roster in a flexible way.
+ * TODO:
+ *  - receive all roster items
+ *    - parse 'em
+ *    - make 'em accessible
+ *  - build a comfortable roster bar
+ *    - roster participants have to be interactively selectable
+ *    - the status of te participants have to be displayed
+ *    - the subscription state have to be displayed
+ *    - the ressource name have to be displayed
+ */
 void show_roster(netdata *net) {
   iks *x=NULL;
   x = iks_make_iq (IKS_TYPE_GET, IKS_NS_ROSTER);
@@ -56,23 +95,13 @@ void show_roster(netdata *net) {
   iks_recv(net->parser,-1);
 }
 
+/*
+ * Actually the main menu.. it will be changed in the near future
+ * to be a part of the whole UI. A menu based client is not comfortable.
+ * It have to be interactively but integrated in the main UI.
+ */
 void menu(netdata *net,wsize size) {
-//  char *myptr=NULL;
   char buf[2];
-/*  char *endptr=NULL;
-  long val=0;
-  while (val != 9) {*/
-  /*  myptr=enter_text("[1] send a message\n"
-                   "[2] show the roster\n"
-                   "[3] set your presence state\n"
-                   "[9] quit\n"
-                   "----------------------------\n"
-                   "your choice: ",myptr);
-    printf("%s\n",myptr);*/
-/*    val=strtol(ptr,&endptr,10);
-    printf("%s, %ld\n",ptr,val);
-    
-   // if (ptr!=NULL) free(ptr);*/
   while (atoi(buf) != 9) {
     flush_stdin();
     create_swindow(size.ws_col,size.ws_row);
@@ -101,8 +130,3 @@ void menu(netdata *net,wsize size) {
   }
   set_presence_offline(net);
 }
-//  if (ptr!=NULL)
-//      free(ptr);
-//}
-
-
