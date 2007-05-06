@@ -43,4 +43,9 @@ void setup_filter (netdata *net){
       IKS_RULE_SUBTYPE, IKS_TYPE_RESULT,
       IKS_RULE_ID, "roster",
       IKS_RULE_DONE);
+  iks_filter_add_rule(cj_filter, (iksFilterHook *) on_roster, net,
+      IKS_RULE_TYPE, IKS_PAK_IQ,
+      IKS_RULE_SUBTYPE, IKS_TYPE_RESULT,
+      IKS_RULE_NS, "jabber:iq:roster",
+      IKS_RULE_DONE);
 }
