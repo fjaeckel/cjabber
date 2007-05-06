@@ -56,11 +56,11 @@ void presence(netdata *net){
   flush_stdin();
   char buf[2];
   printf("[1] free for chat\n"
-                 "[2] away\n"
-                 "[3] extended away\n"
-                 "[4] dnd\n"
-                 "[5] unavailable\n------------------\n"
-                 "select your presence state: ");
+         "[2] away\n"
+         "[3] extended away\n"
+         "[4] dnd\n"
+         "[5] unavailable\n------------------\n"
+         "select your presence state: ");
   fgets(buf,2,stdin);
   strtok(buf,"\r\n");
   switch(atoi(buf)) {
