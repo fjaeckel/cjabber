@@ -51,7 +51,7 @@ void show_roster(netdata *net) {
     iks *x=NULL;
     x=iks_make_iq(IKS_TYPE_GET,"jabber:iq:roster");
     iks_send(net->parser,x);
-    iks_recv(net->parser,10);
+    iks_recv(net->parser,1);
 }
 
 void menu(netdata *net) {
