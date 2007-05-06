@@ -56,8 +56,12 @@ int on_result (netdata *net, ikspak *pak){
 }
 
 void on_log (netdata *net, const char *data, size_t size, int is_incoming) {
-	if (iks_is_secure (net->parser)) fprintf (stderr, "Sec\n");
-	if (is_incoming) fprintf (stderr, "<< RECV << \n"); else fprintf (stderr, ">> SEND >> \n");
+	if (iks_is_secure (net->parser)) 
+      fprintf (stderr, "Sec\n");
+	if (is_incoming) 
+      fprintf (stderr, "<< RECV << \n");
+  else 
+      fprintf (stderr, ">> SEND >> \n");
 	fprintf (stderr, "[%s]\n", data);
 }
 
