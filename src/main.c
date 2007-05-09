@@ -60,22 +60,30 @@ int main(int argc, char *argv[]) {
         	printf("port: %i\n", port);
 #endif
         }
-        if(!strncmp(argv[args],"-r",sizeof(argv[args]))){
+        else if(!strncmp(argv[args],"-r",sizeof(argv[args]))){
           resource = argv[args+1];
           args++;
 #ifdef DEBUG
           printf("resource: %s\n",resource);
 #endif
         }
-        if(!strncmp(argv[args],"-pw",sizeof(argv[args]))){
+        else if(!strncmp(argv[args],"-pw",sizeof(argv[args]))){
             password=argv[args+1];
             args++;
 #ifdef DEBUG
             printf("password: %s\n",password);
 #endif
         }
+        else {
+          usage(argv[0]);
+          return 1;
+        }
       }
     }
+  }
+  else if(argc=1) {
+    usage(argv[0]);
+    return 1;
   }
   /*
    * connect, d00d! :-D

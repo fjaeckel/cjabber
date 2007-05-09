@@ -18,5 +18,10 @@
 #include <stdio.h>
 
 void usage(char *pname){
-    printf("%s -u id@serv.er -p 5222 -pw my_cool_password\n",pname);
+    printf("Usage: %s [OPTIONS]\n"
+           "a console based jabber client.\n\n"
+           "-u\tthe jabberid which you want to use\n"
+           "-p\tthe port you want to connect to\n"
+           "-pw\tthe passwort you want to use in cleartext ASCII\n"
+           "-r\tthe name of your resource [default: cjabber]\n",pname);
 }
