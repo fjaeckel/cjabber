@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
       }
     }
   }
-  else if(argc=1) {
+  else if(argc==1) {
     usage(argv[0]);
     return 1;
   }
