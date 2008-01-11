@@ -17,11 +17,11 @@
 
 CC=gcc
 SRC=src
-LIBS=-liksemel
+LIBS=-lcurses
 #CFLAGS=-Wall -DDEBUG -Iinclude -ggdb3 -g
 CFLAGS=-Wall -DDEBUG -Iinclude 
 #CFLAGS=-Wall -Iinclude
-OBJ=filter.o hooks.o presence.o cj_connect.o error.o create_id.o check_state.o usage.o ui.o input.o
+OBJ=ui.o
 
 
 all: cjabber
@@ -29,35 +29,8 @@ all: cjabber
 cjabber: ${OBJ} main.o
 	${CC} -o cjabber ${SRC}/*.o ${LIBS} ${CFLAGS}
 
-input.o:
-	${CC} -c ${SRC}/input.c -o ${SRC}/input.o ${CFLAGS}
-
 ui.o:
 	${CC} -c ${SRC}/ui.c -o ${SRC}/ui.o ${CFLAGS}
-
-filter.o:
-	${CC} -c ${SRC}/filter.c -o ${SRC}/filter.o ${CFLAGS}
-
-hooks.o: filter.o
-	${CC} -c ${SRC}/hooks.c -o ${SRC}/hooks.o ${CFLAGS}
-
-presence.o:
-	${CC} -c ${SRC}/presence.c -o ${SRC}/presence.o ${CFLAGS}
-
-cj_connect.o: presence.o
-	${CC} -c ${SRC}/cj_connect.c -o ${SRC}/cj_connect.o ${CFLAGS}
-
-error.o:
-	${CC} -c ${SRC}/error.c -o ${SRC}/error.o ${CFLAGS}
-
-create_id.o:
-	${CC} -c ${SRC}/create_id.c -o ${SRC}/create_id.o ${CFLAGS}
-
-check_state.o:
-	${CC} -c ${SRC}/check_state.c -o ${SRC}/check_state.o ${CFLAGS}
-
-usage.o:
-	${CC} -c ${SRC}/usage.c -o ${SRC}/usage.o ${CFLAGS}
 
 main.o: ${OBJ}
 	${CC} -c ${SRC}/main.c -o ${SRC}/main.o ${CFLAGS}
