@@ -1,0 +1,17 @@
+::[15:50:57]:: < KillerFox> jchome: wenn du jetzt schon ein q definierst, dann mach auch ein 
+free auf q, wenn realloc fehlschlägt.
+::[15:51:09]:: < telmich> jchome: ret == -1 => eventuell verschiedene faelle noch abfangen 
+(siehe errno)
+::[15:51:51]:: < telmich> KillerFox: das mit dem sichern des pointers sagest du ja gestern, 
+finde ic hpersoenlich aber nicht 
+                          einmal so sinnvoll
+::[15:51:54]:: < jchome> KillerFox: *duck* danke
+::[15:52:09]:: < jchome> telmich: ack, das werd ich noch machen
+::[15:52:22]:: < telmich> wenn realloc() fehlschlaegt, ist es imho immer sinnvoll return 
+NULL; zu machen
+
+::[16:06:12]:: < KillerFox> jchome: versuch den strncmp da noch weg zu optimieren.
+
+::[15:57:28]:: < telmich> if(p[len] == '\n') realloc(p,len-1);
+
+http://killerfox.forkbomb.ch/cgi-bin/gitweb.cgi?p=secguard.git;a=blob;h=e0009b38ade43061712f6838f67b9dab1f17df4c;hb=cf99a560071d01ecffbea60348adf2b059a390eb;f=lib/ioutils.c
